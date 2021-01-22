@@ -15,12 +15,11 @@ Python >= 3.6
 ## Installation & Usage
 ### pip install
 
-If the python package is hosted on a repository, you can install directly using:
+The python package is hosted on PyPI, you can install directly using:
 
 ```sh
-pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
+pip install airflow-python-sdk
 ```
-(you may need to run `pip` with root permission: `sudo pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git`)
 
 Then import the package:
 ```python
@@ -66,6 +65,7 @@ configuration = airflow_python_sdk.Configuration(
 
 # Configure HTTP basic authorization: basicAuth
 configuration = airflow_python_sdk.Configuration(
+    host = "https://<your-airflow-2.0.0>/api/v1",
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
