@@ -44,7 +44,4 @@ setup(
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
     license="MIT",
-    long_description="""\
-    Apache Airflow management API.  # noqa: E501
-    """
 )
