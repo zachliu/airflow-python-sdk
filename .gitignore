@@ -70,3 +70,4 @@ target/
 .openapi*
 .travis*
 git_push.sh
+my_tests.py
