@@ -12,7 +12,7 @@
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "airflow-python-sdk"
-VERSION = "0.0.2"
+VERSION = "0.0.3"
 # To install the library, run the following
 #
 # python setup.py install
@@ -32,7 +32,7 @@ setup(
     description="Airflow API (Stable)",
     author="Zach Liu",
     author_email="zach.z.liu@gmail.com",
-    url="",
+    url="https://github.com/zachliu/airflow-python-sdk",
     keywords=["OpenAPI", "OpenAPI-Generator", "Airflow API (Stable)"],
     python_requires=">=3.6",
     install_requires=REQUIRES,
