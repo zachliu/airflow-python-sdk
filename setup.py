@@ -32,7 +32,7 @@ setup(
     description="Airflow API (Stable)",
     author="Zach Liu",
     author_email="zach.z.liu@gmail.com",
-    url="https://github.com/zachliu/airflow-python-sdk",
+    url="",
     keywords=["OpenAPI", "OpenAPI-Generator", "Airflow API (Stable)"],
     python_requires=">=3.6",
     install_requires=REQUIRES,
