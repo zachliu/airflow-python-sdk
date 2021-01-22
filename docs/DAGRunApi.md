@@ -1,4 +1,4 @@
-# openapi_client.DAGRunApi
+# airflow_python_sdk.DAGRunApi
 
 All URIs are relative to *http://localhost/api/v1*
 
@@ -20,13 +20,13 @@ Delete a DAG Run
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import dag_run_api
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import dag_run_api
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -36,13 +36,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -52,7 +52,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # Delete a DAG Run
         api_instance.delete_dag_run(dag_id, dag_run_id)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling DAGRunApi->delete_dag_run: %s\n" % e)
 ```
 
@@ -96,14 +96,14 @@ Get a DAG Run
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import dag_run_api
-from openapi_client.model.dag_run import DAGRun
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import dag_run_api
+from airflow_python_sdk.model.dag_run import DAGRun
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -113,13 +113,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -130,7 +130,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get a DAG Run
         api_response = api_instance.get_dag_run(dag_id, dag_run_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling DAGRunApi->get_dag_run: %s\n" % e)
 ```
 
@@ -176,14 +176,14 @@ This endpoint support reading resources across multiple DAGs by specifying a \"-
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import dag_run_api
-from openapi_client.model.dag_run_collection import DAGRunCollection
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import dag_run_api
+from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.dag_run_collection import DAGRunCollection
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -193,13 +193,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -211,7 +211,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get all DAG Runs
         api_response = api_instance.get_dag_runs(dag_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling DAGRunApi->get_dag_runs: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -220,7 +220,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get all DAG Runs
         api_response = api_instance.get_dag_runs(dag_id, limit=limit, offset=offset)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling DAGRunApi->get_dag_runs: %s\n" % e)
 ```
 
@@ -263,14 +263,14 @@ Update a DAG Run
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import dag_run_api
-from openapi_client.model.dag_run import DAGRun
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import dag_run_api
+from airflow_python_sdk.model.dag_run import DAGRun
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -280,13 +280,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -309,7 +309,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Update a DAG Run
         api_response = api_instance.update_dag_run(dag_id, dag_run_id, dag_run)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling DAGRunApi->update_dag_run: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -318,7 +318,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Update a DAG Run
         api_response = api_instance.update_dag_run(dag_id, dag_run_id, dag_run, update_mask=update_mask)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling DAGRunApi->update_dag_run: %s\n" % e)
 ```
 

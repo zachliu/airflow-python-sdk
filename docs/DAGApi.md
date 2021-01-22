@@ -1,4 +1,4 @@
-# openapi_client.DAGApi
+# airflow_python_sdk.DAGApi
 
 All URIs are relative to *http://localhost/api/v1*
 
@@ -25,14 +25,14 @@ Presents only information available at database (DAGModel).
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import dag_api
-from openapi_client.model.error import Error
-from openapi_client.model.dag import DAG
+import airflow_python_sdk
+from airflow_python_sdk.api import dag_api
+from airflow_python_sdk.model.dag import DAG
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -42,13 +42,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -58,7 +58,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get basic information about a DAG
         api_response = api_instance.get_dag(dag_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling DAGApi->get_dag: %s\n" % e)
 ```
 
@@ -101,14 +101,14 @@ Get source code using file token
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import dag_api
-from openapi_client.model.inline_response2001 import InlineResponse2001
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import dag_api
+from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.inline_response2001 import InlineResponse2001
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -118,13 +118,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     file_token = "file_token_example" # str | The key containing the encrypted path to the file. Encryption and encryption takes place only on the server side. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change. 
@@ -134,7 +134,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get source code using file token
         api_response = api_instance.get_dag_source(file_token)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling DAGApi->get_dag_source: %s\n" % e)
 ```
 
@@ -177,14 +177,14 @@ Get simplified representation of DAG.
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import dag_api
-from openapi_client.model.error import Error
-from openapi_client.model.dag_structure import DagStructure
+import airflow_python_sdk
+from airflow_python_sdk.api import dag_api
+from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.dag_structure import DagStructure
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -194,13 +194,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -210,7 +210,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get simplified representation of DAG.
         api_response = api_instance.get_dag_structure(dag_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling DAGApi->get_dag_structure: %s\n" % e)
 ```
 
@@ -253,14 +253,14 @@ Get all DAGs
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import dag_api
-from openapi_client.model.dag_collection import DAGCollection
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import dag_api
+from airflow_python_sdk.model.dag_collection import DAGCollection
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -270,13 +270,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
@@ -288,7 +288,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get all DAGs
         api_response = api_instance.get_dags(limit=limit, offset=offset)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling DAGApi->get_dags: %s\n" % e)
 ```
 
@@ -330,14 +330,14 @@ Get simplified representation of a task.
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import dag_api
-from openapi_client.model.error import Error
-from openapi_client.model.task import Task
+import airflow_python_sdk
+from airflow_python_sdk.api import dag_api
+from airflow_python_sdk.model.task import Task
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -347,13 +347,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -364,7 +364,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get simplified representation of a task.
         api_response = api_instance.get_task(dag_id, task_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling DAGApi->get_task: %s\n" % e)
 ```
 
@@ -408,14 +408,14 @@ Get tasks for DAG
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import dag_api
-from openapi_client.model.task_collection import TaskCollection
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import dag_api
+from airflow_python_sdk.model.task_collection import TaskCollection
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -425,13 +425,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -441,7 +441,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get tasks for DAG
         api_response = api_instance.get_tasks(dag_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling DAGApi->get_tasks: %s\n" % e)
 ```
 
@@ -484,14 +484,14 @@ Update the specific DAG
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import dag_api
-from openapi_client.model.error import Error
-from openapi_client.model.dag import DAG
+import airflow_python_sdk
+from airflow_python_sdk.api import dag_api
+from airflow_python_sdk.model.dag import DAG
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -501,13 +501,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -517,7 +517,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Update the specific DAG
         api_response = api_instance.update_dag(dag_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling DAGApi->update_dag: %s\n" % e)
 ```
 

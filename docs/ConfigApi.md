@@ -1,4 +1,4 @@
-# openapi_client.ConfigApi
+# airflow_python_sdk.ConfigApi
 
 All URIs are relative to *http://localhost/api/v1*
 
@@ -17,14 +17,14 @@ Get current configuration
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import config_api
-from openapi_client.model.error import Error
-from openapi_client.model.config import Config
+import airflow_python_sdk
+from airflow_python_sdk.api import config_api
+from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.config import Config
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -34,13 +34,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = config_api.ConfigApi(api_client)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
@@ -52,7 +52,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get current configuration
         api_response = api_instance.get_config(limit=limit, offset=offset)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling ConfigApi->get_config: %s\n" % e)
 ```
 

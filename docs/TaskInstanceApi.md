@@ -1,4 +1,4 @@
-# openapi_client.TaskInstanceApi
+# airflow_python_sdk.TaskInstanceApi
 
 All URIs are relative to *http://localhost/api/v1*
 
@@ -21,13 +21,13 @@ Delete DAG Run
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import task_instance_api
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import task_instance_api
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -37,13 +37,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -54,7 +54,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # Delete DAG Run
         api_instance.delete_task_instance(dag_id, task_id, execution_date)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling TaskInstanceApi->delete_task_instance: %s\n" % e)
 ```
 
@@ -99,14 +99,14 @@ Get extra links for task instance
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import task_instance_api
-from openapi_client.model.extra_link_collection import ExtraLinkCollection
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import task_instance_api
+from airflow_python_sdk.model.extra_link_collection import ExtraLinkCollection
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -116,13 +116,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -134,7 +134,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get extra links for task instance
         api_response = api_instance.get_extra_links(dag_id, task_id, execution_date)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_extra_links: %s\n" % e)
 ```
 
@@ -179,14 +179,14 @@ Get logs for specific task instance
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import task_instance_api
-from openapi_client.model.error import Error
-from openapi_client.model.inline_response200 import InlineResponse200
+import airflow_python_sdk
+from airflow_python_sdk.api import task_instance_api
+from airflow_python_sdk.model.inline_response200 import InlineResponse200
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -196,13 +196,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -217,7 +217,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get logs for specific task instance
         api_response = api_instance.get_logs(dag_id, task_id, execution_date, task_try_number)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_logs: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -226,7 +226,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get logs for specific task instance
         api_response = api_instance.get_logs(dag_id, task_id, execution_date, task_try_number, full_content=full_content, token=token)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_logs: %s\n" % e)
 ```
 
@@ -275,14 +275,14 @@ Get a task instance
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import task_instance_api
-from openapi_client.model.error import Error
-from openapi_client.model.task_instance import TaskInstance
+import airflow_python_sdk
+from airflow_python_sdk.api import task_instance_api
+from airflow_python_sdk.model.task_instance import TaskInstance
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -292,13 +292,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -310,7 +310,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get a task instance
         api_response = api_instance.get_task_instance(dag_id, task_id, execution_date)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_task_instance: %s\n" % e)
 ```
 
@@ -355,14 +355,14 @@ Update a task instance
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import task_instance_api
-from openapi_client.model.error import Error
-from openapi_client.model.task_instance import TaskInstance
+import airflow_python_sdk
+from airflow_python_sdk.api import task_instance_api
+from airflow_python_sdk.model.task_instance import TaskInstance
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -372,13 +372,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -424,7 +424,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Update a task instance
         api_response = api_instance.update_task_instance(dag_id, task_id, execution_date, task_instance)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling TaskInstanceApi->update_task_instance: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -433,7 +433,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Update a task instance
         api_response = api_instance.update_task_instance(dag_id, task_id, execution_date, task_instance, update_mask=update_mask)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling TaskInstanceApi->update_task_instance: %s\n" % e)
 ```
 

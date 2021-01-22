@@ -1,4 +1,4 @@
-# openapi_client.EventLogApi
+# airflow_python_sdk.EventLogApi
 
 All URIs are relative to *http://localhost/api/v1*
 
@@ -21,14 +21,14 @@ Create event log
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import event_log_api
-from openapi_client.model.error import Error
-from openapi_client.model.event_log import EventLog
+import airflow_python_sdk
+from airflow_python_sdk.api import event_log_api
+from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.event_log import EventLog
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -38,13 +38,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = event_log_api.EventLogApi(api_client)
     event_log = EventLog(
@@ -63,7 +63,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Create event log
         api_response = api_instance.create_event_log(event_log)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling EventLogApi->create_event_log: %s\n" % e)
 ```
 
@@ -106,13 +106,13 @@ Delete a log entry
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import event_log_api
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import event_log_api
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -122,13 +122,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = event_log_api.EventLogApi(api_client)
     event_log_id = 1 # int | The Import Error ID.
@@ -137,7 +137,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # Delete a log entry
         api_instance.delete_event_log_entry(event_log_id)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling EventLogApi->delete_event_log_entry: %s\n" % e)
 ```
 
@@ -180,14 +180,14 @@ Get all log entries from event log
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import event_log_api
-from openapi_client.model.error import Error
-from openapi_client.model.event_log_collection import EventLogCollection
+import airflow_python_sdk
+from airflow_python_sdk.api import event_log_api
+from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.event_log_collection import EventLogCollection
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -197,13 +197,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = event_log_api.EventLogApi(api_client)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
@@ -215,7 +215,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get all log entries from event log
         api_response = api_instance.get_event_log(limit=limit, offset=offset)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling EventLogApi->get_event_log: %s\n" % e)
 ```
 
@@ -258,14 +258,14 @@ Get a log entry
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import event_log_api
-from openapi_client.model.error import Error
-from openapi_client.model.event_log import EventLog
+import airflow_python_sdk
+from airflow_python_sdk.api import event_log_api
+from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.event_log import EventLog
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -275,13 +275,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = event_log_api.EventLogApi(api_client)
     event_log_id = 1 # int | The Import Error ID.
@@ -291,7 +291,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get a log entry
         api_response = api_instance.get_event_log_entry(event_log_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling EventLogApi->get_event_log_entry: %s\n" % e)
 ```
 
@@ -334,14 +334,14 @@ Update a log entry
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import event_log_api
-from openapi_client.model.error import Error
-from openapi_client.model.event_log import EventLog
+import airflow_python_sdk
+from airflow_python_sdk.api import event_log_api
+from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.event_log import EventLog
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -351,13 +351,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = event_log_api.EventLogApi(api_client)
     event_log_id = 1 # int | The Import Error ID.
@@ -380,7 +380,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Update a log entry
         api_response = api_instance.update_event_log_entry(event_log_id, event_log)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling EventLogApi->update_event_log_entry: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -389,7 +389,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Update a log entry
         api_response = api_instance.update_event_log_entry(event_log_id, event_log, update_mask=update_mask)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling EventLogApi->update_event_log_entry: %s\n" % e)
 ```
 

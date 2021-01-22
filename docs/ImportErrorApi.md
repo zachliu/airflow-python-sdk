@@ -1,4 +1,4 @@
-# openapi_client.ImportErrorApi
+# airflow_python_sdk.ImportErrorApi
 
 All URIs are relative to *http://localhost/api/v1*
 
@@ -19,13 +19,13 @@ Delete an import error
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import import_error_api
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import import_error_api
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -35,13 +35,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = import_error_api.ImportErrorApi(api_client)
     import_error_id = 1 # int | The Import Error ID.
@@ -50,7 +50,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # Delete an import error
         api_instance.delete_import_error(import_error_id)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling ImportErrorApi->delete_import_error: %s\n" % e)
 ```
 
@@ -93,14 +93,14 @@ Get an import errors
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import import_error_api
-from openapi_client.model.error import Error
-from openapi_client.model.import_error import ImportError
+import airflow_python_sdk
+from airflow_python_sdk.api import import_error_api
+from airflow_python_sdk.model.import_error import ImportError
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -110,13 +110,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = import_error_api.ImportErrorApi(api_client)
     import_error_id = 1 # int | The Import Error ID.
@@ -126,7 +126,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get an import errors
         api_response = api_instance.get_import_error(import_error_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling ImportErrorApi->get_import_error: %s\n" % e)
 ```
 
@@ -169,14 +169,14 @@ Get all import errors
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import import_error_api
-from openapi_client.model.import_error_collection import ImportErrorCollection
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import import_error_api
+from airflow_python_sdk.model.import_error_collection import ImportErrorCollection
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -186,13 +186,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = import_error_api.ImportErrorApi(api_client)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
@@ -204,7 +204,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get all import errors
         api_response = api_instance.get_import_errors(limit=limit, offset=offset)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling ImportErrorApi->get_import_errors: %s\n" % e)
 ```
 

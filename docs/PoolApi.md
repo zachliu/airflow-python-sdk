@@ -1,4 +1,4 @@
-# openapi_client.PoolApi
+# airflow_python_sdk.PoolApi
 
 All URIs are relative to *http://localhost/api/v1*
 
@@ -22,14 +22,14 @@ Create aa pool
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import pool_api
-from openapi_client.model.pool import Pool
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import pool_api
+from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.pool import Pool
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -39,13 +39,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pool_api.PoolApi(api_client)
     pool = Pool(
@@ -63,7 +63,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Create aa pool
         api_response = api_instance.create_pool(pool)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling PoolApi->create_pool: %s\n" % e)
 ```
 
@@ -106,13 +106,13 @@ Delete a pool
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import pool_api
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import pool_api
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -122,13 +122,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pool_api.PoolApi(api_client)
     pool_id = 1 # int | The Pool ID.
@@ -137,7 +137,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # Delete a pool
         api_instance.delete_pool(pool_id)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling PoolApi->delete_pool: %s\n" % e)
 ```
 
@@ -180,14 +180,14 @@ Get a pool
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import pool_api
-from openapi_client.model.pool import Pool
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import pool_api
+from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.pool import Pool
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -197,13 +197,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pool_api.PoolApi(api_client)
     pool_id = 1 # int | The Pool ID.
@@ -213,7 +213,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get a pool
         api_response = api_instance.get_pool(pool_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling PoolApi->get_pool: %s\n" % e)
 ```
 
@@ -256,14 +256,14 @@ Get all pools
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import pool_api
-from openapi_client.model.pool_collection import PoolCollection
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import pool_api
+from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.pool_collection import PoolCollection
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -273,13 +273,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pool_api.PoolApi(api_client)
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
@@ -291,7 +291,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get all pools
         api_response = api_instance.get_pools(limit=limit, offset=offset)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling PoolApi->get_pools: %s\n" % e)
 ```
 
@@ -336,14 +336,14 @@ This endpoint support reading resources across multiple DAGs by specifying a \"-
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import pool_api
-from openapi_client.model.error import Error
-from openapi_client.model.task_instance_collection import TaskInstanceCollection
+import airflow_python_sdk
+from airflow_python_sdk.api import pool_api
+from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.task_instance_collection import TaskInstanceCollection
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -353,13 +353,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pool_api.PoolApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -371,7 +371,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get list of task instance of DAG.
         api_response = api_instance.get_task_instances(dag_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling PoolApi->get_task_instances: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -380,7 +380,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get list of task instance of DAG.
         api_response = api_instance.get_task_instances(dag_id, limit=limit, offset=offset)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling PoolApi->get_task_instances: %s\n" % e)
 ```
 
@@ -424,15 +424,15 @@ Update a pool
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import pool_api
-from openapi_client.model.pool import Pool
-from openapi_client.model.connection import Connection
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import pool_api
+from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.connection import Connection
+from airflow_python_sdk.model.pool import Pool
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -442,13 +442,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pool_api.PoolApi(api_client)
     pool_id = 1 # int | The Pool ID.
@@ -470,7 +470,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Update a pool
         api_response = api_instance.upadte_pool(pool_id, pool)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling PoolApi->upadte_pool: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -479,7 +479,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Update a pool
         api_response = api_instance.upadte_pool(pool_id, pool, update_mask=update_mask)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling PoolApi->upadte_pool: %s\n" % e)
 ```
 

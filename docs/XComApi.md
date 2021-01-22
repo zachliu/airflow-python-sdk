@@ -1,4 +1,4 @@
-# openapi_client.XComApi
+# airflow_python_sdk.XComApi
 
 All URIs are relative to *http://localhost/api/v1*
 
@@ -21,13 +21,13 @@ Delete an XCom entry
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import x_com_api
-from openapi_client.model.error import Error
+import airflow_python_sdk
+from airflow_python_sdk.api import x_com_api
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -37,13 +37,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = x_com_api.XComApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -55,7 +55,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # Delete an XCom entry
         api_instance.delete_x_com_value(dag_id, task_id, execution_date, key)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling XComApi->delete_x_com_value: %s\n" % e)
 ```
 
@@ -101,14 +101,14 @@ Get an XCom entry
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import x_com_api
-from openapi_client.model.error import Error
-from openapi_client.model.x_com import XCom
+import airflow_python_sdk
+from airflow_python_sdk.api import x_com_api
+from airflow_python_sdk.model.x_com import XCom
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -118,13 +118,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = x_com_api.XComApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -137,7 +137,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get an XCom entry
         api_response = api_instance.get_x_com_value(dag_id, task_id, execution_date, key)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling XComApi->get_x_com_value: %s\n" % e)
 ```
 
@@ -185,14 +185,14 @@ This endpoint support reading resources across multiple Task Instances by specif
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import x_com_api
-from openapi_client.model.error import Error
-from openapi_client.model.x_com_collection import XComCollection
+import airflow_python_sdk
+from airflow_python_sdk.api import x_com_api
+from airflow_python_sdk.model.x_com_collection import XComCollection
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -202,13 +202,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = x_com_api.XComApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -222,7 +222,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get all XCom values
         api_response = api_instance.get_x_com_values(dag_id, task_id, execution_date)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling XComApi->get_x_com_values: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -231,7 +231,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Get all XCom values
         api_response = api_instance.get_x_com_values(dag_id, task_id, execution_date, limit=limit, offset=offset)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling XComApi->get_x_com_values: %s\n" % e)
 ```
 
@@ -277,14 +277,14 @@ Update an XCom entry
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import x_com_api
-from openapi_client.model.error import Error
-from openapi_client.model.x_com import XCom
+import airflow_python_sdk
+from airflow_python_sdk.api import x_com_api
+from airflow_python_sdk.model.x_com import XCom
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -294,13 +294,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = x_com_api.XComApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -317,7 +317,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Update an XCom entry
         api_response = api_instance.update_x_com_value(dag_id, task_id, execution_date, key, x_com)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling XComApi->update_x_com_value: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -326,7 +326,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Update an XCom entry
         api_response = api_instance.update_x_com_value(dag_id, task_id, execution_date, key, x_com, update_mask=update_mask)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling XComApi->update_x_com_value: %s\n" % e)
 ```
 
@@ -375,14 +375,14 @@ Create an XCom entry
 * Basic Authentication (basicAuth):
 ```python
 import time
-import openapi_client
-from openapi_client.api import x_com_api
-from openapi_client.model.error import Error
-from openapi_client.model.x_com import XCom
+import airflow_python_sdk
+from airflow_python_sdk.api import x_com_api
+from airflow_python_sdk.model.x_com import XCom
+from airflow_python_sdk.model.error import Error
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     host = "http://localhost/api/v1"
 )
 
@@ -392,13 +392,13 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure HTTP basic authorization: basicAuth
-configuration = openapi_client.Configuration(
+configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = x_com_api.XComApi(api_client)
     dag_id = 1 # int | The DAG ID.
@@ -411,7 +411,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # Create an XCom entry
         api_response = api_instance.update_x_com_values(dag_id, task_id, execution_date, x_com)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except airflow_python_sdk.ApiException as e:
         print("Exception when calling XComApi->update_x_com_values: %s\n" % e)
 ```
 
