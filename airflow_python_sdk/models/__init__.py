@@ -10,6 +10,7 @@
 # sys.setrecursionlimit(n)
 
 from airflow_python_sdk.model.class_reference import ClassReference
+from airflow_python_sdk.model.clear_task_instance import ClearTaskInstance
 from airflow_python_sdk.model.collection_info import CollectionInfo
 from airflow_python_sdk.model.color import Color
 from airflow_python_sdk.model.config import Config
@@ -49,6 +50,8 @@ from airflow_python_sdk.model.task_extra_links import TaskExtraLinks
 from airflow_python_sdk.model.task_fail import TaskFail
 from airflow_python_sdk.model.task_instance import TaskInstance
 from airflow_python_sdk.model.task_instance_collection import TaskInstanceCollection
+from airflow_python_sdk.model.task_instance_reference import TaskInstanceReference
+from airflow_python_sdk.model.task_instance_reference_collection import TaskInstanceReferenceCollection
 from airflow_python_sdk.model.task_state import TaskState
 from airflow_python_sdk.model.time_delta import TimeDelta
 from airflow_python_sdk.model.trigger_rule import TriggerRule

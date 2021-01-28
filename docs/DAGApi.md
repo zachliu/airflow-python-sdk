@@ -4,6 +4,7 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**clear_task_instances**](DAGApi.md#clear_task_instances) | **POST** /dags/{dag_id}/clearTaskInstances | Clear a set of task instances
 [**get_dag**](DAGApi.md#get_dag) | **GET** /dags/{dag_id} | Get basic information about a DAG
 [**get_dag_source**](DAGApi.md#get_dag_source) | **GET** /dagSources/{file_token} | Get source code using file token
 [**get_dag_structure**](DAGApi.md#get_dag_structure) | **GET** /dags/{dag_id}/structure | Get simplified representation of DAG.
@@ -12,6 +13,96 @@ Method | HTTP request | Description
 [**get_tasks**](DAGApi.md#get_tasks) | **GET** /dags/{dag_id}/tasks | Get tasks for DAG
 [**update_dag**](DAGApi.md#update_dag) | **PATCH** /dags/{dag_id} | Update the specific DAG
 
+
+# **clear_task_instances**
+> TaskInstanceReferenceCollection clear_task_instances(dag_id, clear_task_instance)
+
+Clear a set of task instances
+
+Clears a set of task instances associated with the DAG for a specified date range. 
+
+### Example
+
+* Basic Authentication (basicAuth):
+```python
+import time
+import airflow_python_sdk
+from airflow_python_sdk.api import dag_api
+from airflow_python_sdk.model.task_instance_reference_collection import TaskInstanceReferenceCollection
+from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.clear_task_instance import ClearTaskInstance
+from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_python_sdk.Configuration(
+    host = "http://localhost/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: basicAuth
+configuration = airflow_python_sdk.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with airflow_python_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = dag_api.DAGApi(api_client)
+    dag_id = 1 # int | The DAG ID.
+    clear_task_instance = ClearTaskInstance(
+        dry_run=True,
+        end_date="end_date_example",
+        include_parentdag=True,
+        include_subdags=True,
+        only_failed=True,
+        only_running=False,
+        reset_dag_runs=True,
+        start_date="start_date_example",
+    ) # ClearTaskInstance | Parameters of action
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Clear a set of task instances
+        api_response = api_instance.clear_task_instances(dag_id, clear_task_instance)
+        pprint(api_response)
+    except airflow_python_sdk.ApiException as e:
+        print("Exception when calling DAGApi->clear_task_instances: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dag_id** | **int**| The DAG ID. |
+ **clear_task_instance** | [**ClearTaskInstance**](ClearTaskInstance.md)| Parameters of action |
+
+### Return type
+
+[**TaskInstanceReferenceCollection**](TaskInstanceReferenceCollection.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response. |  -  |
+**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
+**403** | Client does not have sufficient permission. |  -  |
+**404** | A specified resource is not found. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_dag**
 > DAG get_dag(dag_id)
