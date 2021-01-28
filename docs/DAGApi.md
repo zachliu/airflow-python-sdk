@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**get_task**](DAGApi.md#get_task) | **GET** /dags/{dag_id}/tasks/{task_id} | Get simplified representation of a task.
 [**get_tasks**](DAGApi.md#get_tasks) | **GET** /dags/{dag_id}/tasks | Get tasks for DAG
 [**update_dag**](DAGApi.md#update_dag) | **PATCH** /dags/{dag_id} | Update the specific DAG
+[**update_task_instances_state**](DAGApi.md#update_task_instances_state) | **POST** /dags/{dag_id}/updateTaskInstancesState | Set a state of task instances
 
 
 # **clear_task_instances**
@@ -19,7 +20,7 @@ Method | HTTP request | Description
 
 Clear a set of task instances
 
-Clears a set of task instances associated with the DAG for a specified date range.
+Clears a set of task instances associated with the DAG for a specified date range. 
 
 ### Example
 
@@ -56,13 +57,13 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
     dag_id = "dag_id_example" # str | The DAG ID.
     clear_task_instance = ClearTaskInstance(
         dry_run=True,
-        start_date="2021-01-23T00:00:00.00Z",
-        end_date="2021-01-23T23:59:59.00Z",
+        end_date="end_date_example",
         include_parentdag=True,
         include_subdags=True,
         only_failed=True,
         only_running=False,
         reset_dag_runs=True,
+        start_date="start_date_example",
     ) # ClearTaskInstance | Parameters of action
 
     # example passing only required values which don't have defaults set
@@ -218,7 +219,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
-    file_token = "file_token_example" # str | The key containing the encrypted path to the file. Encryption and encryption takes place only on the server side. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change.
+    file_token = "file_token_example" # str | The key containing the encrypted path to the file. Encryption and encryption takes place only on the server side. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change. 
 
     # example passing only required values which don't have defaults set
     try:
@@ -635,6 +636,96 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful response. |  -  |
+**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
+**403** | Client does not have sufficient permission. |  -  |
+**404** | A specified resource is not found. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_task_instances_state**
+> TaskInstanceReferenceCollection update_task_instances_state(dag_id, update_task_instances_state)
+
+Set a state of task instances
+
+Updates the state for multiple task instances simultaneously. 
+
+### Example
+
+* Basic Authentication (basicAuth):
+```python
+import time
+import airflow_python_sdk
+from airflow_python_sdk.api import dag_api
+from airflow_python_sdk.model.task_instance_reference_collection import TaskInstanceReferenceCollection
+from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.update_task_instances_state import UpdateTaskInstancesState
+from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_python_sdk.Configuration(
+    host = "http://localhost/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: basicAuth
+configuration = airflow_python_sdk.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with airflow_python_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = dag_api.DAGApi(api_client)
+    dag_id = "dag_id_example" # str | The DAG ID.
+    update_task_instances_state = UpdateTaskInstancesState(
+        dry_run=True,
+        execution_date="execution_date_example",
+        include_downstream=True,
+        include_future=True,
+        include_past=True,
+        include_upstream=True,
+        new_state="success",
+        task_id="task_id_example",
+    ) # UpdateTaskInstancesState | Parameters of action
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Set a state of task instances
+        api_response = api_instance.update_task_instances_state(dag_id, update_task_instances_state)
+        pprint(api_response)
+    except airflow_python_sdk.ApiException as e:
+        print("Exception when calling DAGApi->update_task_instances_state: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dag_id** | **str**| The DAG ID. |
+ **update_task_instances_state** | [**UpdateTaskInstancesState**](UpdateTaskInstancesState.md)| Parameters of action |
+
+### Return type
+
+[**TaskInstanceReferenceCollection**](TaskInstanceReferenceCollection.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success. |  -  |
 **401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
 **403** | Client does not have sufficient permission. |  -  |
 **404** | A specified resource is not found. |  -  |

@@ -55,6 +55,7 @@ from airflow_python_sdk.model.task_instance_reference_collection import TaskInst
 from airflow_python_sdk.model.task_state import TaskState
 from airflow_python_sdk.model.time_delta import TimeDelta
 from airflow_python_sdk.model.trigger_rule import TriggerRule
+from airflow_python_sdk.model.update_task_instances_state import UpdateTaskInstancesState
 from airflow_python_sdk.model.variable import Variable
 from airflow_python_sdk.model.variable_all_of import VariableAllOf
 from airflow_python_sdk.model.variable_collection import VariableCollection

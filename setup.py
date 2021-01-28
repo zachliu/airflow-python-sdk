@@ -12,7 +12,7 @@
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "airflow-python-sdk"
-VERSION = "0.1.6"
+VERSION = "0.2.6"
 # To install the library, run the following
 #
 # python setup.py install
