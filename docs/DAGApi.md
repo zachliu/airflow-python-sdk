@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 Clear a set of task instances
 
-Clears a set of task instances associated with the DAG for a specified date range. 
+Clears a set of task instances associated with the DAG for a specified date range.
 
 ### Example
 
@@ -56,13 +56,13 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
     dag_id = "dag_id_example" # str | The DAG ID.
     clear_task_instance = ClearTaskInstance(
         dry_run=True,
-        end_date="end_date_example",
+        start_date="2021-01-23T00:00:00.00Z",
+        end_date="2021-01-23T23:59:59.00Z",
         include_parentdag=True,
         include_subdags=True,
         only_failed=True,
         only_running=False,
         reset_dag_runs=True,
-        start_date="start_date_example",
     ) # ClearTaskInstance | Parameters of action
 
     # example passing only required values which don't have defaults set
@@ -218,7 +218,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
-    file_token = "file_token_example" # str | The key containing the encrypted path to the file. Encryption and encryption takes place only on the server side. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change. 
+    file_token = "file_token_example" # str | The key containing the encrypted path to the file. Encryption and encryption takes place only on the server side. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change.
 
     # example passing only required values which don't have defaults set
     try:
