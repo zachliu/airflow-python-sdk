@@ -46,7 +46,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
-    dag_id = 1 # int | The DAG ID.
+    dag_id = "dag_id_example" # str | The DAG ID.
     task_id = 1 # int | The Task ID.
     execution_date = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` 
 
@@ -62,7 +62,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dag_id** | **int**| The DAG ID. |
+ **dag_id** | **str**| The DAG ID. |
  **task_id** | **int**| The Task ID. |
  **execution_date** | **datetime**| The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. &#x60;2017-07-21T17:32:28Z&#x60;  |
 
@@ -125,7 +125,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
-    dag_id = 1 # int | The DAG ID.
+    dag_id = "dag_id_example" # str | The DAG ID.
     task_id = 1 # int | The Task ID.
     execution_date = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` 
 
@@ -142,7 +142,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dag_id** | **int**| The DAG ID. |
+ **dag_id** | **str**| The DAG ID. |
  **task_id** | **int**| The Task ID. |
  **execution_date** | **datetime**| The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. &#x60;2017-07-21T17:32:28Z&#x60;  |
 
@@ -205,7 +205,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
-    dag_id = 1 # int | The DAG ID.
+    dag_id = "dag_id_example" # str | The DAG ID.
     task_id = 1 # int | The Task ID.
     execution_date = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` 
     task_try_number = 1 # int | The Task Try Number.
@@ -234,7 +234,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dag_id** | **int**| The DAG ID. |
+ **dag_id** | **str**| The DAG ID. |
  **task_id** | **int**| The Task ID. |
  **execution_date** | **datetime**| The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. &#x60;2017-07-21T17:32:28Z&#x60;  |
  **task_try_number** | **int**| The Task Try Number. |
@@ -301,7 +301,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
-    dag_id = 1 # int | The DAG ID.
+    dag_id = "dag_id_example" # str | The DAG ID.
     task_id = 1 # int | The Task ID.
     execution_date = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` 
 
@@ -318,7 +318,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dag_id** | **int**| The DAG ID. |
+ **dag_id** | **str**| The DAG ID. |
  **task_id** | **int**| The Task ID. |
  **execution_date** | **datetime**| The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. &#x60;2017-07-21T17:32:28Z&#x60;  |
 
@@ -381,7 +381,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
-    dag_id = 1 # int | The DAG ID.
+    dag_id = "dag_id_example" # str | The DAG ID.
     task_id = 1 # int | The Task ID.
     execution_date = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` 
     task_instance = TaskInstance(
@@ -441,7 +441,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dag_id** | **int**| The DAG ID. |
+ **dag_id** | **str**| The DAG ID. |
  **task_id** | **int**| The Task ID. |
  **execution_date** | **datetime**| The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. &#x60;2017-07-21T17:32:28Z&#x60;  |
  **task_instance** | [**TaskInstance**](TaskInstance.md)|  |

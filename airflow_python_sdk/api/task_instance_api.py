@@ -56,7 +56,7 @@ class TaskInstanceApi(object):
             >>> result = thread.get()
 
             Args:
-                dag_id (int): The DAG ID.
+                dag_id (str): The DAG ID.
                 task_id (int): The Task ID.
                 execution_date (datetime): The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` 
 
@@ -149,7 +149,7 @@ class TaskInstanceApi(object):
                 },
                 'openapi_types': {
                     'dag_id':
-                        (int,),
+                        (str,),
                     'task_id':
                         (int,),
                     'execution_date':
@@ -194,7 +194,7 @@ class TaskInstanceApi(object):
             >>> result = thread.get()
 
             Args:
-                dag_id (int): The DAG ID.
+                dag_id (str): The DAG ID.
                 task_id (int): The Task ID.
                 execution_date (datetime): The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` 
 
@@ -287,7 +287,7 @@ class TaskInstanceApi(object):
                 },
                 'openapi_types': {
                     'dag_id':
-                        (int,),
+                        (str,),
                     'task_id':
                         (int,),
                     'execution_date':
@@ -333,7 +333,7 @@ class TaskInstanceApi(object):
             >>> result = thread.get()
 
             Args:
-                dag_id (int): The DAG ID.
+                dag_id (str): The DAG ID.
                 task_id (int): The Task ID.
                 execution_date (datetime): The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` 
                 task_try_number (int): The Task Try Number.
@@ -435,7 +435,7 @@ class TaskInstanceApi(object):
                 },
                 'openapi_types': {
                     'dag_id':
-                        (int,),
+                        (str,),
                     'task_id':
                         (int,),
                     'execution_date':
@@ -493,7 +493,7 @@ class TaskInstanceApi(object):
             >>> result = thread.get()
 
             Args:
-                dag_id (int): The DAG ID.
+                dag_id (str): The DAG ID.
                 task_id (int): The Task ID.
                 execution_date (datetime): The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` 
 
@@ -586,7 +586,7 @@ class TaskInstanceApi(object):
                 },
                 'openapi_types': {
                     'dag_id':
-                        (int,),
+                        (str,),
                     'task_id':
                         (int,),
                     'execution_date':
@@ -632,7 +632,7 @@ class TaskInstanceApi(object):
             >>> result = thread.get()
 
             Args:
-                dag_id (int): The DAG ID.
+                dag_id (str): The DAG ID.
                 task_id (int): The Task ID.
                 execution_date (datetime): The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` 
                 task_instance (TaskInstance):
@@ -732,7 +732,7 @@ class TaskInstanceApi(object):
                 },
                 'openapi_types': {
                     'dag_id':
-                        (int,),
+                        (str,),
                     'task_id':
                         (int,),
                     'execution_date':

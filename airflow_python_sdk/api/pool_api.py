@@ -539,7 +539,7 @@ class PoolApi(object):
             >>> result = thread.get()
 
             Args:
-                dag_id (int): The DAG ID.
+                dag_id (str): The DAG ID.
 
             Keyword Args:
                 limit (int): The numbers of items to return.. [optional] if omitted the server will use the default value of 100
@@ -636,7 +636,7 @@ class PoolApi(object):
                 },
                 'openapi_types': {
                     'dag_id':
-                        (int,),
+                        (str,),
                     'limit':
                         (int,),
                     'offset':

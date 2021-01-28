@@ -45,7 +45,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
-    dag_id = 1 # int | The DAG ID.
+    dag_id = "dag_id_example" # str | The DAG ID.
     dag_run_id = 1 # int | The DAG Run ID.
 
     # example passing only required values which don't have defaults set
@@ -60,7 +60,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dag_id** | **int**| The DAG ID. |
+ **dag_id** | **str**| The DAG ID. |
  **dag_run_id** | **int**| The DAG Run ID. |
 
 ### Return type
@@ -122,7 +122,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
-    dag_id = 1 # int | The DAG ID.
+    dag_id = "dag_id_example" # str | The DAG ID.
     dag_run_id = 1 # int | The DAG Run ID.
 
     # example passing only required values which don't have defaults set
@@ -138,7 +138,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dag_id** | **int**| The DAG ID. |
+ **dag_id** | **str**| The DAG ID. |
  **dag_run_id** | **int**| The DAG Run ID. |
 
 ### Return type
@@ -202,7 +202,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
-    dag_id = 1 # int | The DAG ID.
+    dag_id = "dag_id_example" # str | The DAG ID.
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
     offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
 
@@ -228,7 +228,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dag_id** | **int**| The DAG ID. |
+ **dag_id** | **str**| The DAG ID. |
  **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
  **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
 
@@ -289,7 +289,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_run_api.DAGRunApi(api_client)
-    dag_id = 1 # int | The DAG ID.
+    dag_id = "dag_id_example" # str | The DAG ID.
     dag_run_id = 1 # int | The DAG Run ID.
     dag_run = DAGRun(
         dag_id="dag_id_example",
@@ -326,7 +326,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dag_id** | **int**| The DAG ID. |
+ **dag_id** | **str**| The DAG ID. |
  **dag_run_id** | **int**| The DAG Run ID. |
  **dag_run** | [**DAGRun**](DAGRun.md)|  |
  **update_mask** | **[str]**| The fields to update on the connection (connection, pool etc). If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  | [optional]

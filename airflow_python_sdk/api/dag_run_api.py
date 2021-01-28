@@ -54,7 +54,7 @@ class DAGRunApi(object):
             >>> result = thread.get()
 
             Args:
-                dag_id (int): The DAG ID.
+                dag_id (str): The DAG ID.
                 dag_run_id (int): The DAG Run ID.
 
             Keyword Args:
@@ -142,7 +142,7 @@ class DAGRunApi(object):
                 },
                 'openapi_types': {
                     'dag_id':
-                        (int,),
+                        (str,),
                     'dag_run_id':
                         (int,),
                 },
@@ -182,7 +182,7 @@ class DAGRunApi(object):
             >>> result = thread.get()
 
             Args:
-                dag_id (int): The DAG ID.
+                dag_id (str): The DAG ID.
                 dag_run_id (int): The DAG Run ID.
 
             Keyword Args:
@@ -270,7 +270,7 @@ class DAGRunApi(object):
                 },
                 'openapi_types': {
                     'dag_id':
-                        (int,),
+                        (str,),
                     'dag_run_id':
                         (int,),
                 },
@@ -310,7 +310,7 @@ class DAGRunApi(object):
             >>> result = thread.get()
 
             Args:
-                dag_id (int): The DAG ID.
+                dag_id (str): The DAG ID.
 
             Keyword Args:
                 limit (int): The numbers of items to return.. [optional] if omitted the server will use the default value of 100
@@ -407,7 +407,7 @@ class DAGRunApi(object):
                 },
                 'openapi_types': {
                     'dag_id':
-                        (int,),
+                        (str,),
                     'limit':
                         (int,),
                     'offset':
@@ -452,7 +452,7 @@ class DAGRunApi(object):
             >>> result = thread.get()
 
             Args:
-                dag_id (int): The DAG ID.
+                dag_id (str): The DAG ID.
                 dag_run_id (int): The DAG Run ID.
                 dag_run (DAGRun):
 
@@ -547,7 +547,7 @@ class DAGRunApi(object):
                 },
                 'openapi_types': {
                     'dag_id':
-                        (int,),
+                        (str,),
                     'dag_run_id':
                         (int,),
                     'dag_run':

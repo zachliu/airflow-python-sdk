@@ -61,7 +61,7 @@ class DAGApi(object):
             >>> result = thread.get()
 
             Args:
-                dag_id (int): The DAG ID.
+                dag_id (str): The DAG ID.
                 clear_task_instance (ClearTaskInstance): Parameters of action
 
             Keyword Args:
@@ -149,7 +149,7 @@ class DAGApi(object):
                 },
                 'openapi_types': {
                     'dag_id':
-                        (int,),
+                        (str,),
                     'clear_task_instance':
                         (ClearTaskInstance,),
                 },
@@ -190,7 +190,7 @@ class DAGApi(object):
             >>> result = thread.get()
 
             Args:
-                dag_id (int): The DAG ID.
+                dag_id (str): The DAG ID.
 
             Keyword Args:
                 _return_http_data_only (bool): response data without head status
@@ -273,7 +273,7 @@ class DAGApi(object):
                 },
                 'openapi_types': {
                     'dag_id':
-                        (int,),
+                        (str,),
                 },
                 'attribute_map': {
                     'dag_id': 'dag_id',
@@ -426,7 +426,7 @@ class DAGApi(object):
             >>> result = thread.get()
 
             Args:
-                dag_id (int): The DAG ID.
+                dag_id (str): The DAG ID.
 
             Keyword Args:
                 _return_http_data_only (bool): response data without head status
@@ -509,7 +509,7 @@ class DAGApi(object):
                 },
                 'openapi_types': {
                     'dag_id':
-                        (int,),
+                        (str,),
                 },
                 'attribute_map': {
                     'dag_id': 'dag_id',
@@ -673,7 +673,7 @@ class DAGApi(object):
             >>> result = thread.get()
 
             Args:
-                dag_id (int): The DAG ID.
+                dag_id (str): The DAG ID.
                 task_id (int): The Task ID.
 
             Keyword Args:
@@ -761,7 +761,7 @@ class DAGApi(object):
                 },
                 'openapi_types': {
                     'dag_id':
-                        (int,),
+                        (str,),
                     'task_id':
                         (int,),
                 },
@@ -800,7 +800,7 @@ class DAGApi(object):
             >>> result = thread.get()
 
             Args:
-                dag_id (int): The DAG ID.
+                dag_id (str): The DAG ID.
 
             Keyword Args:
                 _return_http_data_only (bool): response data without head status
@@ -883,7 +883,7 @@ class DAGApi(object):
                 },
                 'openapi_types': {
                     'dag_id':
-                        (int,),
+                        (str,),
                 },
                 'attribute_map': {
                     'dag_id': 'dag_id',
@@ -918,7 +918,7 @@ class DAGApi(object):
             >>> result = thread.get()
 
             Args:
-                dag_id (int): The DAG ID.
+                dag_id (str): The DAG ID.
 
             Keyword Args:
                 _return_http_data_only (bool): response data without head status
@@ -1001,7 +1001,7 @@ class DAGApi(object):
                 },
                 'openapi_types': {
                     'dag_id':
-                        (int,),
+                        (str,),
                 },
                 'attribute_map': {
                     'dag_id': 'dag_id',

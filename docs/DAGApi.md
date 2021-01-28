@@ -53,7 +53,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
-    dag_id = 1 # int | The DAG ID.
+    dag_id = "dag_id_example" # str | The DAG ID.
     clear_task_instance = ClearTaskInstance(
         dry_run=True,
         end_date="end_date_example",
@@ -78,7 +78,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dag_id** | **int**| The DAG ID. |
+ **dag_id** | **str**| The DAG ID. |
  **clear_task_instance** | [**ClearTaskInstance**](ClearTaskInstance.md)| Parameters of action |
 
 ### Return type
@@ -142,7 +142,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
-    dag_id = 1 # int | The DAG ID.
+    dag_id = "dag_id_example" # str | The DAG ID.
 
     # example passing only required values which don't have defaults set
     try:
@@ -157,7 +157,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dag_id** | **int**| The DAG ID. |
+ **dag_id** | **str**| The DAG ID. |
 
 ### Return type
 
@@ -294,7 +294,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
-    dag_id = 1 # int | The DAG ID.
+    dag_id = "dag_id_example" # str | The DAG ID.
 
     # example passing only required values which don't have defaults set
     try:
@@ -309,7 +309,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dag_id** | **int**| The DAG ID. |
+ **dag_id** | **str**| The DAG ID. |
 
 ### Return type
 
@@ -447,7 +447,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
-    dag_id = 1 # int | The DAG ID.
+    dag_id = "dag_id_example" # str | The DAG ID.
     task_id = 1 # int | The Task ID.
 
     # example passing only required values which don't have defaults set
@@ -463,7 +463,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dag_id** | **int**| The DAG ID. |
+ **dag_id** | **str**| The DAG ID. |
  **task_id** | **int**| The Task ID. |
 
 ### Return type
@@ -525,7 +525,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
-    dag_id = 1 # int | The DAG ID.
+    dag_id = "dag_id_example" # str | The DAG ID.
 
     # example passing only required values which don't have defaults set
     try:
@@ -540,7 +540,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dag_id** | **int**| The DAG ID. |
+ **dag_id** | **str**| The DAG ID. |
 
 ### Return type
 
@@ -601,7 +601,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = dag_api.DAGApi(api_client)
-    dag_id = 1 # int | The DAG ID.
+    dag_id = "dag_id_example" # str | The DAG ID.
 
     # example passing only required values which don't have defaults set
     try:
@@ -616,7 +616,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dag_id** | **int**| The DAG ID. |
+ **dag_id** | **str**| The DAG ID. |
 
 ### Return type
 

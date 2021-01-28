@@ -362,7 +362,7 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = pool_api.PoolApi(api_client)
-    dag_id = 1 # int | The DAG ID.
+    dag_id = "dag_id_example" # str | The DAG ID.
     limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
     offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
 
@@ -388,7 +388,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dag_id** | **int**| The DAG ID. |
+ **dag_id** | **str**| The DAG ID. |
  **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
  **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
 
