@@ -11,7 +11,7 @@
 """
 
 
-__version__ = "0.2.6"
+__version__ = "0.3.7"
 
 # import ApiClient
 from airflow_python_sdk.api_client import ApiClient
