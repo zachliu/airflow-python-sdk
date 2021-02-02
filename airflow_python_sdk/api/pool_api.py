@@ -46,7 +46,7 @@ class PoolApi(object):
             pool,
             **kwargs
         ):
-            """Create aa pool  # noqa: E501
+            """Create a pool  # noqa: E501
 
             This method makes a synchronous HTTP request by default. To make an
             asynchronous HTTP request, please pass async_req=True

@@ -4,7 +4,7 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_pool**](PoolApi.md#create_pool) | **POST** /pools | Create aa pool
+[**create_pool**](PoolApi.md#create_pool) | **POST** /pools | Create a pool
 [**delete_pool**](PoolApi.md#delete_pool) | **DELETE** /pools/{pool_id} | Delete a pool
 [**get_pool**](PoolApi.md#get_pool) | **GET** /pools/{pool_id} | Get a pool
 [**get_pools**](PoolApi.md#get_pools) | **GET** /pools | Get all pools
@@ -15,7 +15,7 @@ Method | HTTP request | Description
 # **create_pool**
 > Pool create_pool(pool)
 
-Create aa pool
+Create a pool
 
 ### Example
 
@@ -60,7 +60,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
     # example passing only required values which don't have defaults set
     try:
-        # Create aa pool
+        # Create a pool
         api_response = api_instance.create_pool(pool)
         pprint(api_response)
     except airflow_python_sdk.ApiException as e:
