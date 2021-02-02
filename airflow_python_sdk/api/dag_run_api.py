@@ -315,6 +315,12 @@ class DAGRunApi(object):
             Keyword Args:
                 limit (int): The numbers of items to return.. [optional] if omitted the server will use the default value of 100
                 offset (int): The number of items to skip before starting to collect the result set.. [optional]
+                execution_date_gte (datetime): The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` . [optional]
+                execution_date_lte (datetime): The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` . [optional]
+                start_date_gte (datetime): The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` . [optional]
+                start_date_lte (datetime): The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` . [optional]
+                end_date_gte (datetime): The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` . [optional]
+                end_date_lte (datetime): The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` . [optional]
                 _return_http_data_only (bool): response data without head status
                     code and headers. Default is True.
                 _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -379,6 +385,12 @@ class DAGRunApi(object):
                     'dag_id',
                     'limit',
                     'offset',
+                    'execution_date_gte',
+                    'execution_date_lte',
+                    'start_date_gte',
+                    'start_date_lte',
+                    'end_date_gte',
+                    'end_date_lte',
                 ],
                 'required': [
                     'dag_id',
@@ -412,16 +424,40 @@ class DAGRunApi(object):
                         (int,),
                     'offset':
                         (int,),
+                    'execution_date_gte':
+                        (datetime,),
+                    'execution_date_lte':
+                        (datetime,),
+                    'start_date_gte':
+                        (datetime,),
+                    'start_date_lte':
+                        (datetime,),
+                    'end_date_gte':
+                        (datetime,),
+                    'end_date_lte':
+                        (datetime,),
                 },
                 'attribute_map': {
                     'dag_id': 'dag_id',
                     'limit': 'limit',
                     'offset': 'offset',
+                    'execution_date_gte': 'execution_date_gte',
+                    'execution_date_lte': 'execution_date_lte',
+                    'start_date_gte': 'start_date_gte',
+                    'start_date_lte': 'start_date_lte',
+                    'end_date_gte': 'end_date_gte',
+                    'end_date_lte': 'end_date_lte',
                 },
                 'location_map': {
                     'dag_id': 'path',
                     'limit': 'query',
                     'offset': 'query',
+                    'execution_date_gte': 'query',
+                    'execution_date_lte': 'query',
+                    'start_date_gte': 'query',
+                    'start_date_lte': 'query',
+                    'end_date_gte': 'query',
+                    'end_date_lte': 'query',
                 },
                 'collection_format_map': {
                 }
@@ -434,6 +470,135 @@ class DAGRunApi(object):
             },
             api_client=api_client,
             callable=__get_dag_runs
+        )
+
+        def __trigger_dag_run(
+            self,
+            dag_id,
+            dag_run,
+            **kwargs
+        ):
+            """Trigger a new DAG run  # noqa: E501
+
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
+
+            >>> thread = api.trigger_dag_run(dag_id, dag_run, async_req=True)
+            >>> result = thread.get()
+
+            Args:
+                dag_id (str): The DAG ID.
+                dag_run (DAGRun):
+
+            Keyword Args:
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
+
+            Returns:
+                DAGRun
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['dag_id'] = \
+                dag_id
+            kwargs['dag_run'] = \
+                dag_run
+            return self.call_with_http_info(**kwargs)
+
+        self.trigger_dag_run = Endpoint(
+            settings={
+                'response_type': (DAGRun,),
+                'auth': [
+                    'basicAuth'
+                ],
+                'endpoint_path': '/dags/{dag_id}/dagRuns',
+                'operation_id': 'trigger_dag_run',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'dag_id',
+                    'dag_run',
+                ],
+                'required': [
+                    'dag_id',
+                    'dag_run',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'dag_id':
+                        (str,),
+                    'dag_run':
+                        (DAGRun,),
+                },
+                'attribute_map': {
+                    'dag_id': 'dag_id',
+                },
+                'location_map': {
+                    'dag_id': 'path',
+                    'dag_run': 'body',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [
+                    'application/json'
+                ]
+            },
+            api_client=api_client,
+            callable=__trigger_dag_run
         )
 
         def __update_dag_run(

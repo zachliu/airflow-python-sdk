@@ -83,10 +83,11 @@ class DAGRun(ModelNormal):
             'dag_id': (str,),  # noqa: E501
             'execution_date': (datetime,),  # noqa: E501
             'start_date': (datetime,),  # noqa: E501
-            'end_date': (datetime,),  # noqa: E501
+            'end_date': (datetime, none_type,),  # noqa: E501
             'state': (TaskState,),  # noqa: E501
-            'run_id': (str,),  # noqa: E501
+            'dag_run_id': (str, none_type,),  # noqa: E501
             'external_trigger': (bool,),  # noqa: E501
+            'conf': ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},),  # noqa: E501
         }
 
     @cached_property
@@ -100,8 +101,9 @@ class DAGRun(ModelNormal):
         'start_date': 'start_date',  # noqa: E501
         'end_date': 'end_date',  # noqa: E501
         'state': 'state',  # noqa: E501
-        'run_id': 'run_id',  # noqa: E501
+        'dag_run_id': 'dag_run_id',  # noqa: E501
         'external_trigger': 'external_trigger',  # noqa: E501
+        'conf': 'conf',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -153,10 +155,11 @@ class DAGRun(ModelNormal):
             dag_id (str): [optional]  # noqa: E501
             execution_date (datetime): [optional]  # noqa: E501
             start_date (datetime): [optional]  # noqa: E501
-            end_date (datetime): [optional]  # noqa: E501
+            end_date (datetime, none_type): [optional]  # noqa: E501
             state (TaskState): [optional]  # noqa: E501
-            run_id (str): [optional]  # noqa: E501
+            dag_run_id (str, none_type): [optional]  # noqa: E501
             external_trigger (bool): [optional] if omitted the server will use the default value of True  # noqa: E501
+            conf ({str: (bool, date, datetime, dict, float, int, list, str, none_type)}): JSON object describing additional configuration parameters.  The value of this field can be set only when creating the object. If you try to modify the field of an existing object, the request fails with an BAD_REQUEST error. . [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
