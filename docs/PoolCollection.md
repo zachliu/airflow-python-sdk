@@ -1,5 +1,6 @@
 # PoolCollection
 
+Collection of pool.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -1,9 +1,10 @@
 # XComCollection
 
+Collection of XCom entries.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**xcom** | [**[XComCollectionItem]**](XComCollectionItem.md) |  | [optional] 
+**xcom_entries** | [**[XComCollectionItem]**](XComCollectionItem.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

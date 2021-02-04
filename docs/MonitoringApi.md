@@ -1,0 +1,148 @@
+# airflow_python_sdk.MonitoringApi
+
+All URIs are relative to *http://localhost/api/v1*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**get_health**](MonitoringApi.md#get_health) | **GET** /health | Get a instance status
+[**get_version**](MonitoringApi.md#get_version) | **GET** /version | Get version information
+
+
+# **get_health**
+> HealthInfo get_health()
+
+Get a instance status
+
+Get the status of Airflow's metadatabase and scheduler. It incluse info about metadatabase and last heartbeat of scheduler. 
+
+### Example
+
+* Basic Authentication (Basic):
+```python
+import time
+import airflow_python_sdk
+from airflow_python_sdk.api import monitoring_api
+from airflow_python_sdk.model.health_info import HealthInfo
+from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_python_sdk.Configuration(
+    host = "http://localhost/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = airflow_python_sdk.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with airflow_python_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = monitoring_api.MonitoringApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
+    try:
+        # Get a instance status
+        api_response = api_instance.get_health()
+        pprint(api_response)
+    except airflow_python_sdk.ApiException as e:
+        print("Exception when calling MonitoringApi->get_health: %s\n" % e)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**HealthInfo**](HealthInfo.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_version**
+> VersionInfo get_version()
+
+Get version information
+
+### Example
+
+* Basic Authentication (Basic):
+```python
+import time
+import airflow_python_sdk
+from airflow_python_sdk.api import monitoring_api
+from airflow_python_sdk.model.version_info import VersionInfo
+from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_python_sdk.Configuration(
+    host = "http://localhost/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = airflow_python_sdk.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with airflow_python_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = monitoring_api.MonitoringApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
+    try:
+        # Get version information
+        api_response = api_instance.get_version()
+        pprint(api_response)
+    except airflow_python_sdk.ApiException as e:
+        print("Exception when calling MonitoringApi->get_version: %s\n" % e)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**VersionInfo**](VersionInfo.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

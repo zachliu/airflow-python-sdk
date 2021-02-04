@@ -4,99 +4,23 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_task_instance**](TaskInstanceApi.md#delete_task_instance) | **DELETE** /dags/{dag_id}/taskInstances/{task_id}/{execution_date} | Delete DAG Run
-[**get_extra_links**](TaskInstanceApi.md#get_extra_links) | **GET** /dags/{dag_id}/taskInstances/{task_id}/{execution_date}/links | Get extra links for task instance
-[**get_logs**](TaskInstanceApi.md#get_logs) | **GET** /dags/{dag_id}/taskInstances/{task_id}/{execution_date}/logs/{task_try_number} | Get logs for specific task instance
-[**get_task_instance**](TaskInstanceApi.md#get_task_instance) | **GET** /dags/{dag_id}/taskInstances/{task_id}/{execution_date} | Get a task instance
-[**update_task_instance**](TaskInstanceApi.md#update_task_instance) | **PATCH** /dags/{dag_id}/taskInstances/{task_id}/{execution_date} | Update a task instance
+[**get_extra_links**](TaskInstanceApi.md#get_extra_links) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/links | List extra links
+[**get_log**](TaskInstanceApi.md#get_log) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/logs/{task_try_number} | Get logs
+[**get_task_instance**](TaskInstanceApi.md#get_task_instance) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id} | Get a task instance
+[**get_task_instances**](TaskInstanceApi.md#get_task_instances) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances | List task instances
+[**get_task_instances_batch**](TaskInstanceApi.md#get_task_instances_batch) | **POST** /dags/~/dagRuns/~/taskInstances/list | List task instances (batch)
 
-
-# **delete_task_instance**
-> delete_task_instance(dag_id, task_id, execution_date)
-
-Delete DAG Run
-
-### Example
-
-* Basic Authentication (basicAuth):
-```python
-import time
-import airflow_python_sdk
-from airflow_python_sdk.api import task_instance_api
-from airflow_python_sdk.model.error import Error
-from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api/v1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = airflow_python_sdk.Configuration(
-    host = "http://localhost/api/v1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: basicAuth
-configuration = airflow_python_sdk.Configuration(
-    username = 'YOUR_USERNAME',
-    password = 'YOUR_PASSWORD'
-)
-
-# Enter a context with an instance of the API client
-with airflow_python_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = task_instance_api.TaskInstanceApi(api_client)
-    dag_id = "dag_id_example" # str | The DAG ID.
-    task_id = 1 # int | The Task ID.
-    execution_date = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` 
-
-    # example passing only required values which don't have defaults set
-    try:
-        # Delete DAG Run
-        api_instance.delete_task_instance(dag_id, task_id, execution_date)
-    except airflow_python_sdk.ApiException as e:
-        print("Exception when calling TaskInstanceApi->delete_task_instance: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **dag_id** | **str**| The DAG ID. |
- **task_id** | **int**| The Task ID. |
- **execution_date** | **datetime**| The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. &#x60;2017-07-21T17:32:28Z&#x60;  |
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**204** | No content. |  -  |
-**400** | Client specified an invalid argument. |  -  |
-**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
-**403** | Client does not have sufficient permission. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_extra_links**
-> ExtraLinkCollection get_extra_links(dag_id, task_id, execution_date)
+> ExtraLinkCollection get_extra_links(dag_id, dag_run_id, task_id)
 
-Get extra links for task instance
+List extra links
+
+List extra links for task instance. 
 
 ### Example
 
-* Basic Authentication (basicAuth):
+* Basic Authentication (Basic):
 ```python
 import time
 import airflow_python_sdk
@@ -115,7 +39,7 @@ configuration = airflow_python_sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: basicAuth
+# Configure HTTP basic authorization: Basic
 configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
@@ -126,13 +50,13 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
-    task_id = 1 # int | The Task ID.
-    execution_date = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` 
+    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
+    task_id = "task_id_example" # str | The task ID.
 
     # example passing only required values which don't have defaults set
     try:
-        # Get extra links for task instance
-        api_response = api_instance.get_extra_links(dag_id, task_id, execution_date)
+        # List extra links
+        api_response = api_instance.get_extra_links(dag_id, dag_run_id, task_id)
         pprint(api_response)
     except airflow_python_sdk.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_extra_links: %s\n" % e)
@@ -143,8 +67,8 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dag_id** | **str**| The DAG ID. |
- **task_id** | **int**| The Task ID. |
- **execution_date** | **datetime**| The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. &#x60;2017-07-21T17:32:28Z&#x60;  |
+ **dag_run_id** | **str**| The DAG run ID. |
+ **task_id** | **str**| The task ID. |
 
 ### Return type
 
@@ -152,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[Basic](../README.md#Basic)
 
 ### HTTP request headers
 
@@ -162,21 +86,23 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful response. |  -  |
+**200** | Success. |  -  |
 **401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
 **403** | Client does not have sufficient permission. |  -  |
 **404** | A specified resource is not found. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_logs**
-> InlineResponse200 get_logs(dag_id, task_id, execution_date, task_try_number)
+# **get_log**
+> InlineResponse200 get_log(dag_id, dag_run_id, task_id, task_try_number)
 
-Get logs for specific task instance
+Get logs
+
+Get logs for a specific task instance and its try number.
 
 ### Example
 
-* Basic Authentication (basicAuth):
+* Basic Authentication (Basic):
 ```python
 import time
 import airflow_python_sdk
@@ -195,7 +121,7 @@ configuration = airflow_python_sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: basicAuth
+# Configure HTTP basic authorization: Basic
 configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
@@ -206,28 +132,28 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
-    task_id = 1 # int | The Task ID.
-    execution_date = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` 
-    task_try_number = 1 # int | The Task Try Number.
-    full_content = True # bool | A full reply will be returned. By default, only the first fragment will be returned.  (optional)
-    token = True # bool | A token that allows you to continue fetching logs. If passed, it will specify the location from which the download should be continued.  (optional)
+    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
+    task_id = "task_id_example" # str | The task ID.
+    task_try_number = 1 # int | The task try number.
+    full_content = True # bool | A full content will be returned. By default, only the first fragment will be returned.  (optional)
+    token = "token_example" # str | A token that allows you to continue fetching logs. If passed, it will specify the location from which the download should be continued.  (optional)
 
     # example passing only required values which don't have defaults set
     try:
-        # Get logs for specific task instance
-        api_response = api_instance.get_logs(dag_id, task_id, execution_date, task_try_number)
+        # Get logs
+        api_response = api_instance.get_log(dag_id, dag_run_id, task_id, task_try_number)
         pprint(api_response)
     except airflow_python_sdk.ApiException as e:
-        print("Exception when calling TaskInstanceApi->get_logs: %s\n" % e)
+        print("Exception when calling TaskInstanceApi->get_log: %s\n" % e)
 
     # example passing only required values which don't have defaults set
     # and optional values
     try:
-        # Get logs for specific task instance
-        api_response = api_instance.get_logs(dag_id, task_id, execution_date, task_try_number, full_content=full_content, token=token)
+        # Get logs
+        api_response = api_instance.get_log(dag_id, dag_run_id, task_id, task_try_number, full_content=full_content, token=token)
         pprint(api_response)
     except airflow_python_sdk.ApiException as e:
-        print("Exception when calling TaskInstanceApi->get_logs: %s\n" % e)
+        print("Exception when calling TaskInstanceApi->get_log: %s\n" % e)
 ```
 
 ### Parameters
@@ -235,11 +161,11 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dag_id** | **str**| The DAG ID. |
- **task_id** | **int**| The Task ID. |
- **execution_date** | **datetime**| The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. &#x60;2017-07-21T17:32:28Z&#x60;  |
- **task_try_number** | **int**| The Task Try Number. |
- **full_content** | **bool**| A full reply will be returned. By default, only the first fragment will be returned.  | [optional]
- **token** | **bool**| A token that allows you to continue fetching logs. If passed, it will specify the location from which the download should be continued.  | [optional]
+ **dag_run_id** | **str**| The DAG run ID. |
+ **task_id** | **str**| The task ID. |
+ **task_try_number** | **int**| The task try number. |
+ **full_content** | **bool**| A full content will be returned. By default, only the first fragment will be returned.  | [optional]
+ **token** | **str**| A token that allows you to continue fetching logs. If passed, it will specify the location from which the download should be continued.  | [optional]
 
 ### Return type
 
@@ -247,7 +173,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[Basic](../README.md#Basic)
 
 ### HTTP request headers
 
@@ -257,7 +183,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Content of logs. |  -  |
+**200** | Success. |  -  |
 **400** | Client specified an invalid argument. |  -  |
 **401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
 **403** | Client does not have sufficient permission. |  -  |
@@ -266,13 +192,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_task_instance**
-> TaskInstance get_task_instance(dag_id, task_id, execution_date)
+> TaskInstance get_task_instance(dag_id, dag_run_id, task_id)
 
 Get a task instance
 
 ### Example
 
-* Basic Authentication (basicAuth):
+* Basic Authentication (Basic):
 ```python
 import time
 import airflow_python_sdk
@@ -291,7 +217,7 @@ configuration = airflow_python_sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: basicAuth
+# Configure HTTP basic authorization: Basic
 configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
@@ -302,13 +228,13 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
-    task_id = 1 # int | The Task ID.
-    execution_date = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` 
+    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
+    task_id = "task_id_example" # str | The task ID.
 
     # example passing only required values which don't have defaults set
     try:
         # Get a task instance
-        api_response = api_instance.get_task_instance(dag_id, task_id, execution_date)
+        api_response = api_instance.get_task_instance(dag_id, dag_run_id, task_id)
         pprint(api_response)
     except airflow_python_sdk.ApiException as e:
         print("Exception when calling TaskInstanceApi->get_task_instance: %s\n" % e)
@@ -319,8 +245,8 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dag_id** | **str**| The DAG ID. |
- **task_id** | **int**| The Task ID. |
- **execution_date** | **datetime**| The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. &#x60;2017-07-21T17:32:28Z&#x60;  |
+ **dag_run_id** | **str**| The DAG run ID. |
+ **task_id** | **str**| The task ID. |
 
 ### Return type
 
@@ -328,7 +254,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[Basic](../README.md#Basic)
 
 ### HTTP request headers
 
@@ -338,27 +264,29 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful response. |  -  |
+**200** | Success. |  -  |
 **401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
 **403** | Client does not have sufficient permission. |  -  |
 **404** | A specified resource is not found. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update_task_instance**
-> TaskInstance update_task_instance(dag_id, task_id, execution_date, task_instance)
+# **get_task_instances**
+> TaskInstanceCollection get_task_instances(dag_id, dag_run_id)
 
-Update a task instance
+List task instances
+
+This endpoint allows specifying `~` as the dag_id, dag_run_id to retrieve DAG runs for all DAGs and DAG runs. 
 
 ### Example
 
-* Basic Authentication (basicAuth):
+* Basic Authentication (Basic):
 ```python
 import time
 import airflow_python_sdk
 from airflow_python_sdk.api import task_instance_api
-from airflow_python_sdk.model.task_instance import TaskInstance
 from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.task_instance_collection import TaskInstanceCollection
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -371,7 +299,7 @@ configuration = airflow_python_sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: basicAuth
+# Configure HTTP basic authorization: Basic
 configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
@@ -382,59 +310,43 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = task_instance_api.TaskInstanceApi(api_client)
     dag_id = "dag_id_example" # str | The DAG ID.
-    task_id = 1 # int | The Task ID.
-    execution_date = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. `2017-07-21T17:32:28Z` 
-    task_instance = TaskInstance(
-        task_id="task_id_example",
-        dag_id="dag_id_example",
-        execution_date="execution_date_example",
-        start_date="start_date_example",
-        end_date="end_date_example",
-        duration=3.14,
-        state=TaskState("success"),
-        try_number=1,
-        max_tries=1,
-        hostname="hostname_example",
-        unixname="unixname_example",
-        job_id=1,
-        pool="pool_example",
-        pool_slots=1,
-        queue="queue_example",
-        priority_weight=1,
-        operator="operator_example",
-        queued_dttm="queued_dttm_example",
-        pid=1,
-        executor_config="executor_config_example",
-        sla_miss=SLAMiss(
-            task_id="task_id_example",
-            dag_id="dag_id_example",
-            execution_date="execution_date_example",
-            email_sent=True,
-            timestamp="timestamp_example",
-            description="description_example",
-            notification_sent=True,
-        ),
-    ) # TaskInstance | 
-    update_mask = [
-        "update_mask_example",
-    ] # [str] | The fields to update on the connection (connection, pool etc). If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  (optional)
+    dag_run_id = "dag_run_id_example" # str | The DAG run ID.
+    execution_date_gte = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | Returns objects greater or equal to the specified date.  This can be combined with execution_date_lte parameter to receive only the selected period.  (optional)
+    execution_date_lte = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | Returns objects less than or equal to the specified date.  This can be combined with execution_date_gte parameter to receive only the selected period.  (optional)
+    start_date_gte = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period.  (optional)
+    start_date_lte = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | Returns objects less or equal the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  (optional)
+    end_date_gte = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period.  (optional)
+    end_date_lte = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime | Returns objects less than or equal to the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  (optional)
+    duration_gte = 3.14 # float | Returns objects greater than or equal to the specified values.  This can be combined with duration_lte parameter to receive only the selected period.  (optional)
+    duration_lte = 3.14 # float | Returns objects less than or equal to the specified values.  This can be combined with duration_gte parameter to receive only the selected range.  (optional)
+    state = [
+        "state_example",
+    ] # [str] | The value can be repeated to retrieve multiple matching values (OR condition). (optional)
+    pool = [
+        "pool_example",
+    ] # [str] | The value can be repeated to retrieve multiple matching values (OR condition). (optional)
+    queue = [
+        "queue_example",
+    ] # [str] | The value can be repeated to retrieve multiple matching values (OR condition). (optional)
+    limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
+    offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
 
     # example passing only required values which don't have defaults set
     try:
-        # Update a task instance
-        api_response = api_instance.update_task_instance(dag_id, task_id, execution_date, task_instance)
+        # List task instances
+        api_response = api_instance.get_task_instances(dag_id, dag_run_id)
         pprint(api_response)
     except airflow_python_sdk.ApiException as e:
-        print("Exception when calling TaskInstanceApi->update_task_instance: %s\n" % e)
+        print("Exception when calling TaskInstanceApi->get_task_instances: %s\n" % e)
 
     # example passing only required values which don't have defaults set
     # and optional values
     try:
-        # Update a task instance
-        api_response = api_instance.update_task_instance(dag_id, task_id, execution_date, task_instance, update_mask=update_mask)
+        # List task instances
+        api_response = api_instance.get_task_instances(dag_id, dag_run_id, execution_date_gte=execution_date_gte, execution_date_lte=execution_date_lte, start_date_gte=start_date_gte, start_date_lte=start_date_lte, end_date_gte=end_date_gte, end_date_lte=end_date_lte, duration_gte=duration_gte, duration_lte=duration_lte, state=state, pool=pool, queue=queue, limit=limit, offset=offset)
         pprint(api_response)
     except airflow_python_sdk.ApiException as e:
-        print("Exception when calling TaskInstanceApi->update_task_instance: %s\n" % e)
+        print("Exception when calling TaskInstanceApi->get_task_instances: %s\n" % e)
 ```
 
 ### Parameters
@@ -442,18 +354,127 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dag_id** | **str**| The DAG ID. |
- **task_id** | **int**| The Task ID. |
- **execution_date** | **datetime**| The date-time notation as defined by [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6), E.G. &#x60;2017-07-21T17:32:28Z&#x60;  |
- **task_instance** | [**TaskInstance**](TaskInstance.md)|  |
- **update_mask** | **[str]**| The fields to update on the connection (connection, pool etc). If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  | [optional]
+ **dag_run_id** | **str**| The DAG run ID. |
+ **execution_date_gte** | **datetime**| Returns objects greater or equal to the specified date.  This can be combined with execution_date_lte parameter to receive only the selected period.  | [optional]
+ **execution_date_lte** | **datetime**| Returns objects less than or equal to the specified date.  This can be combined with execution_date_gte parameter to receive only the selected period.  | [optional]
+ **start_date_gte** | **datetime**| Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period.  | [optional]
+ **start_date_lte** | **datetime**| Returns objects less or equal the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  | [optional]
+ **end_date_gte** | **datetime**| Returns objects greater or equal the specified date.  This can be combined with start_date_lte parameter to receive only the selected period.  | [optional]
+ **end_date_lte** | **datetime**| Returns objects less than or equal to the specified date.  This can be combined with start_date_gte parameter to receive only the selected period.  | [optional]
+ **duration_gte** | **float**| Returns objects greater than or equal to the specified values.  This can be combined with duration_lte parameter to receive only the selected period.  | [optional]
+ **duration_lte** | **float**| Returns objects less than or equal to the specified values.  This can be combined with duration_gte parameter to receive only the selected range.  | [optional]
+ **state** | **[str]**| The value can be repeated to retrieve multiple matching values (OR condition). | [optional]
+ **pool** | **[str]**| The value can be repeated to retrieve multiple matching values (OR condition). | [optional]
+ **queue** | **[str]**| The value can be repeated to retrieve multiple matching values (OR condition). | [optional]
+ **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
+ **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
 
 ### Return type
 
-[**TaskInstance**](TaskInstance.md)
+[**TaskInstanceCollection**](TaskInstanceCollection.md)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success. |  -  |
+**401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
+**403** | Client does not have sufficient permission. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_task_instances_batch**
+> TaskInstanceCollection get_task_instances_batch(list_task_instance_form)
+
+List task instances (batch)
+
+List task instances from all DAGs and DAG runs. This endpoint is a POST to allow filtering across a large number of DAG IDs, where as a GET it would run in to maximum HTTP request URL length limits. 
+
+### Example
+
+* Basic Authentication (Basic):
+```python
+import time
+import airflow_python_sdk
+from airflow_python_sdk.api import task_instance_api
+from airflow_python_sdk.model.error import Error
+from airflow_python_sdk.model.task_instance_collection import TaskInstanceCollection
+from airflow_python_sdk.model.list_task_instance_form import ListTaskInstanceForm
+from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = airflow_python_sdk.Configuration(
+    host = "http://localhost/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: Basic
+configuration = airflow_python_sdk.Configuration(
+    username = 'YOUR_USERNAME',
+    password = 'YOUR_PASSWORD'
+)
+
+# Enter a context with an instance of the API client
+with airflow_python_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = task_instance_api.TaskInstanceApi(api_client)
+    list_task_instance_form = ListTaskInstanceForm(
+        dag_ids=[
+            "dag_ids_example",
+        ],
+        execution_date_gte=dateutil_parser('1970-01-01T00:00:00.00Z'),
+        execution_date_lte=dateutil_parser('1970-01-01T00:00:00.00Z'),
+        start_date_gte=dateutil_parser('1970-01-01T00:00:00.00Z'),
+        start_date_lte=dateutil_parser('1970-01-01T00:00:00.00Z'),
+        end_date_gte=dateutil_parser('1970-01-01T00:00:00.00Z'),
+        end_date_lte=dateutil_parser('1970-01-01T00:00:00.00Z'),
+        duration_gte=3.14,
+        duration_lte=3.14,
+        state=[
+            "state_example",
+        ],
+        pool=[
+            "pool_example",
+        ],
+        queue=[
+            "queue_example",
+        ],
+    ) # ListTaskInstanceForm | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # List task instances (batch)
+        api_response = api_instance.get_task_instances_batch(list_task_instance_form)
+        pprint(api_response)
+    except airflow_python_sdk.ApiException as e:
+        print("Exception when calling TaskInstanceApi->get_task_instances_batch: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **list_task_instance_form** | [**ListTaskInstanceForm**](ListTaskInstanceForm.md)|  |
+
+### Return type
+
+[**TaskInstanceCollection**](TaskInstanceCollection.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
 
 ### HTTP request headers
 
@@ -463,8 +484,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful response. |  -  |
-**400** | Client specified an invalid argument. |  -  |
+**200** | Success. |  -  |
 **401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
 **403** | Client does not have sufficient permission. |  -  |
 **404** | A specified resource is not found. |  -  |

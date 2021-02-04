@@ -14,7 +14,7 @@ Get current configuration
 
 ### Example
 
-* Basic Authentication (basicAuth):
+* Basic Authentication (Basic):
 ```python
 import time
 import airflow_python_sdk
@@ -33,7 +33,7 @@ configuration = airflow_python_sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: basicAuth
+# Configure HTTP basic authorization: Basic
 configuration = airflow_python_sdk.Configuration(
     username = 'YOUR_USERNAME',
     password = 'YOUR_PASSWORD'
@@ -43,25 +43,18 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = config_api.ConfigApi(api_client)
-    limit = 100 # int | The numbers of items to return. (optional) if omitted the server will use the default value of 100
-    offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
 
-    # example passing only required values which don't have defaults set
-    # and optional values
+    # example, this endpoint has no required or optional parameters
     try:
         # Get current configuration
-        api_response = api_instance.get_config(limit=limit, offset=offset)
+        api_response = api_instance.get_config()
         pprint(api_response)
     except airflow_python_sdk.ApiException as e:
         print("Exception when calling ConfigApi->get_config: %s\n" % e)
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **limit** | **int**| The numbers of items to return. | [optional] if omitted the server will use the default value of 100
- **offset** | **int**| The number of items to skip before starting to collect the result set. | [optional]
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -69,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[Basic](../README.md#Basic)
 
 ### HTTP request headers
 
@@ -79,7 +72,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Return current configuration. |  -  |
+**200** | Success. |  -  |
 **401** | Request not authenticated due to missing, invalid, authentication info. |  -  |
 **403** | Client does not have sufficient permission. |  -  |
 

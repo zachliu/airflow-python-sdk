@@ -1,10 +1,215 @@
 # airflow-python-sdk
-Apache Airflow management API.
+# Overview
+
+To facilitate management, the Apache Airflow supports a range of REST API endpoints across its
+objects.
+This section provides an overview of the API design, methods, and supported use cases.
+
+Most of the endpoints accept `JSON` as input and return `JSON` responses.
+This means that you must usually add the following headers to your request:
+```
+Content-type: application/json
+Accept: application/json
+```
+
+## Resources
+
+The term `resource` refers to a single type of object in the Airflow metadata. An API is broken up by its
+endpoint's corresponding resource.
+The name of a resource is typically plural and expressed in camelCase. Example: `dagRuns`.
+
+Resource names are used as part of endpoint URLs, as well as in API parameters and responses.
+
+## CRUD Operations
+
+The platform supports **C**reate, **R**ead, **U**pdate, and **D**elete operations on most resources.
+You can review the standards for these operations and their standard parameters below.
+
+Some endpoints have special behavior as exceptions.
+
+### Create
+
+To create a resource, you typically submit an HTTP `POST` request with the resource's required metadata
+in the request body.
+The response returns a `201 Created` response code upon success with the resource's metadata, including
+its internal `id`, in the response body.
+
+### Read
+
+An HTTP `GET` request can be used to read a resource or to list a number of resources.
+
+A resource's `id` can be submitted in the request parameters to read a specific resource.
+The response usually returns a `200 OK` response code upon success, with the resource's metadata in
+the response body.
+
+If a `GET` request does not include a specific resource `id`, it is treated as a list request.
+The response usually returns a `200 OK` response code upon success, with an object containing a list
+of resources' metadata in the response body.
+
+When reading resources, some common query parameters are usually available. e.g.:
+```
+v1/connections?limit=25&offset=25
+```
+
+|Query Parameter|Type|Description|
+|---------------|----|-----------|
+|limit|integer|Maximum number of objects to fetch. Usually 25 by default|
+|offset|integer|Offset after which to start returning objects. For use with limit query parameter.|
+
+### Update
+
+Updating a resource requires the resource `id`, and is typically done using an HTTP `PATCH` request,
+with the fields to modify in the request body.
+The response usually returns a `200 OK` response code upon success, with information about the modified
+resource in the response body.
+
+### Delete
+
+Deleting a resource requires the resource `id` and is typically executing via an HTTP `DELETE` request.
+The response usually returns a `204 No Content` response code upon success.
+
+## Conventions
+
+- Resource names are plural and expressed in camelCase.
+- Names are consistent between URL parameter name and field name.
+
+- Field names are in snake_case.
+```json
+{
+    \"name\": \"string\",
+    \"slots\": 0,
+    \"occupied_slots\": 0,
+    \"used_slots\": 0,
+    \"queued_slots\": 0,
+    \"open_slots\": 0
+}
+```
+
+### Update Mask
+
+Update mask is available as a query parameter in patch endpoints. It is used to notify the
+API which fields you want to update. Using `update_mask` makes it easier to update objects
+by helping the server know which fields to update in an object instead of updating all fields.
+The update request ignores any fields that aren't specified in the field mask, leaving them with
+their current values.
+
+Example:
+```
+  resource = request.get('/resource/my-id').json()
+  resource['my_field'] = 'new-value'
+  request.patch('/resource/my-id?update_mask=my_field', data=json.dumps(resource))
+```
+
+## Versioning and Endpoint Lifecycle
+
+- API versioning is not synchronized to specific releases of the Apache Airflow.
+- APIs are designed to be backward compatible.
+- Any changes to the API will first go through a deprecation phase.
+
+# Summary of Changes
+
+| Airflow version | Description |
+|-|-|
+| v2.0 | Initial releaase |
+
+# Trying the API
+
+You can use a third party client, such as [curl](https://curl.haxx.se/), [HTTPie](https://httpie.org/),
+[Postman](https://www.postman.com/) or [the Insomnia rest client](https://insomnia.rest/) to test
+the Apache Airflow API.
+
+Note that you will need to pass credentials data.
+
+For e.g., here is how to pause a DAG with [curl](https://curl.haxx.se/), when basic authorization is used:
+```bash
+curl -X POST 'https://example.com/api/v1/dags/{dag_id}?update_mask=is_paused' \\
+-H 'Content-Type: application/json' \\
+--user \"username:password\" \\
+-d '{
+    \"is_paused\": true
+}'
+```
+
+Using a graphical tool such as [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/),
+it is possible to import the API specifications directly:
+
+1. Download the API specification by clicking the **Download** button at top of this document
+2. Import the JSON specification in the graphical tool of your choice.
+  - In *Postman*, you can click the **import** button at the top
+  - With *Insomnia*, you can just drag-and-drop the file on the UI
+
+Note that with *Postman*, you can also generate code snippets by selecting a request and clicking on
+the **Code** button.
+
+# Authentication
+
+To be able to meet the requirements of many organizations, Airflow supports many authentication methods,
+and it is even possible to add your own method.
+
+If you want to check which auth backend is currently set, you can use
+`airflow config get-value api auth_backend` command as in the example below.
+```bash
+$ airflow config get-value api auth_backend
+airflow.api.auth.backend.basic_auth
+```
+The default is to deny all requests.
+
+For details on configuring the authentication, see
+[API Authorization](https://airflow.apache.org/docs/stable/security/api.html).
+
+# Errors
+
+We follow the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807)
+also known as Problem Details for HTTP APIs.  As with our normal API responses,
+your client must be prepared to gracefully handle additional members of the response.
+
+## Unauthenticated
+
+This indicates that the request has not been applied because it lacks valid authentication
+credentials for the target resource. Please check that you have valid credentials.
+
+## PermissionDenied
+
+This response means that the server understood the request but refuses to authorize
+it because it lacks sufficient rights to the resource. It happens when you do not have the
+necessary permission to execute the action you performed. You need to get the appropriate
+permissions in other to resolve this error.
+
+## BadRequest
+
+This response means that the server cannot or will not process the request due to something
+that is perceived to be a client error (e.g., malformed request syntax, invalid request message
+framing, or deceptive request routing). To resolve this, please ensure that your syntax is correct.
+
+## NotFound
+
+This client error response indicates that the server cannot find the requested resource.
+
+## MethodNotAllowed
+
+Indicates that the request method is known by the server but is not supported by the target resource.
+
+## NotAcceptable
+
+The target resource does not have a current representation that would be acceptable to the user
+agent, according to the proactive negotiation header fields received in the request, and the
+server is unwilling to supply a default representation.
+
+## AlreadyExists
+
+The request could not be completed due to a conflict with the current state of the target
+resource, meaning that the resource already exists
+
+## Unknown
+
+This means that the server encountered an unexpected condition that prevented it from
+fulfilling the request.
+
 
 This Python package is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project based on [the specs](https://github.com/zachliu/airflow-openapi-specs):
 
 - API version: 1.0.0
-- Package version: 0.3.7
+- Package version: 0.3.8
 - Build package: org.openapitools.codegen.languages.PythonClientCodegen
 For more information, please visit [https://github.com/zachliu](https://github.com/zachliu)
 
@@ -63,7 +268,7 @@ configuration = airflow_python_sdk.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure HTTP basic authorization: basicAuth
+# Configure HTTP basic authorization: Basic
 configuration = airflow_python_sdk.Configuration(
     host = "https://<your-airflow-2.0.0>/api/v1",
     username = 'YOUR_USERNAME',
@@ -75,12 +280,10 @@ configuration = airflow_python_sdk.Configuration(
 with airflow_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = config_api.ConfigApi(api_client)
-    limit = 100 # int | The numbers of items to return. (optional) (default to 100)
-offset = 0 # int | The number of items to skip before starting to collect the result set. (optional)
 
     try:
         # Get current configuration
-        api_response = api_instance.get_config(limit=limit, offset=offset)
+        api_response = api_instance.get_config()
         pprint(api_response)
     except airflow_python_sdk.ApiException as e:
         print("Exception when calling ConfigApi->get_config: %s\n" % e)
@@ -93,55 +296,48 @@ All URIs are relative to *http://localhost/api/v1*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ConfigApi* | [**get_config**](docs/ConfigApi.md#get_config) | **GET** /config | Get current configuration
-*ConnectionApi* | [**create_connection**](docs/ConnectionApi.md#create_connection) | **POST** /connections | Create connection entry
-*ConnectionApi* | [**delete_connection**](docs/ConnectionApi.md#delete_connection) | **DELETE** /connections/{connection_id} | Delete a connection entry
-*ConnectionApi* | [**get_connection**](docs/ConnectionApi.md#get_connection) | **GET** /connections/{connection_id} | Get a connection entry
-*ConnectionApi* | [**get_connections**](docs/ConnectionApi.md#get_connections) | **GET** /connections | Get all connection entries
-*ConnectionApi* | [**patch_connection**](docs/ConnectionApi.md#patch_connection) | **PATCH** /connections/{connection_id} | Update a connection entry
-*DAGApi* | [**clear_task_instances**](docs/DAGApi.md#clear_task_instances) | **POST** /dags/{dag_id}/clearTaskInstances | Clear a set of task instances
+*ConnectionApi* | [**delete_connection**](docs/ConnectionApi.md#delete_connection) | **DELETE** /connections/{connection_id} | Delete a connection
+*ConnectionApi* | [**get_connection**](docs/ConnectionApi.md#get_connection) | **GET** /connections/{connection_id} | Get a connection
+*ConnectionApi* | [**get_connections**](docs/ConnectionApi.md#get_connections) | **GET** /connections | List connections
+*ConnectionApi* | [**patch_connection**](docs/ConnectionApi.md#patch_connection) | **PATCH** /connections/{connection_id} | Update a connection
+*ConnectionApi* | [**post_connection**](docs/ConnectionApi.md#post_connection) | **POST** /connections | Create a connection
 *DAGApi* | [**get_dag**](docs/DAGApi.md#get_dag) | **GET** /dags/{dag_id} | Get basic information about a DAG
-*DAGApi* | [**get_dag_source**](docs/DAGApi.md#get_dag_source) | **GET** /dagSources/{file_token} | Get source code using file token
-*DAGApi* | [**get_dag_structure**](docs/DAGApi.md#get_dag_structure) | **GET** /dags/{dag_id}/structure | Get simplified representation of DAG.
-*DAGApi* | [**get_dags**](docs/DAGApi.md#get_dags) | **GET** /dags | Get all DAGs
-*DAGApi* | [**get_task**](docs/DAGApi.md#get_task) | **GET** /dags/{dag_id}/tasks/{task_id} | Get simplified representation of a task.
+*DAGApi* | [**get_dag_details**](docs/DAGApi.md#get_dag_details) | **GET** /dags/{dag_id}/details | Get a simplified representation of DAG
+*DAGApi* | [**get_dag_source**](docs/DAGApi.md#get_dag_source) | **GET** /dagSources/{file_token} | Get a source code
+*DAGApi* | [**get_dags**](docs/DAGApi.md#get_dags) | **GET** /dags | List DAGs
+*DAGApi* | [**get_task**](docs/DAGApi.md#get_task) | **GET** /dags/{dag_id}/tasks/{task_id} | Get simplified representation of a task
 *DAGApi* | [**get_tasks**](docs/DAGApi.md#get_tasks) | **GET** /dags/{dag_id}/tasks | Get tasks for DAG
-*DAGApi* | [**update_dag**](docs/DAGApi.md#update_dag) | **PATCH** /dags/{dag_id} | Update the specific DAG
-*DAGApi* | [**update_task_instances_state**](docs/DAGApi.md#update_task_instances_state) | **POST** /dags/{dag_id}/updateTaskInstancesState | Set a state of task instances
-*DAGRunApi* | [**delete_dag_run**](docs/DAGRunApi.md#delete_dag_run) | **DELETE** /dags/{dag_id}/dagRuns/{dag_run_id} | Delete a DAG Run
-*DAGRunApi* | [**get_dag_run**](docs/DAGRunApi.md#get_dag_run) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id} | Get a DAG Run
-*DAGRunApi* | [**get_dag_runs**](docs/DAGRunApi.md#get_dag_runs) | **GET** /dags/{dag_id}/dagRuns | Get all DAG Runs
-*DAGRunApi* | [**trigger_dag_run**](docs/DAGRunApi.md#trigger_dag_run) | **POST** /dags/{dag_id}/dagRuns | Trigger a new DAG run
-*DAGRunApi* | [**update_dag_run**](docs/DAGRunApi.md#update_dag_run) | **PATCH** /dags/{dag_id}/dagRuns/{dag_run_id} | Update a DAG Run
-*EventLogApi* | [**create_event_log**](docs/EventLogApi.md#create_event_log) | **POST** /eventLogs | Create event log
-*EventLogApi* | [**delete_event_log_entry**](docs/EventLogApi.md#delete_event_log_entry) | **DELETE** /eventLogs/{event_log_id} | Delete a log entry
-*EventLogApi* | [**get_event_log**](docs/EventLogApi.md#get_event_log) | **GET** /eventLogs | Get all log entries from event log
-*EventLogApi* | [**get_event_log_entry**](docs/EventLogApi.md#get_event_log_entry) | **GET** /eventLogs/{event_log_id} | Get a log entry
-*EventLogApi* | [**update_event_log_entry**](docs/EventLogApi.md#update_event_log_entry) | **PATCH** /eventLogs/{event_log_id} | Update a log entry
-*ImportErrorApi* | [**delete_import_error**](docs/ImportErrorApi.md#delete_import_error) | **DELETE** /importErrors/{import_error_id} | Delete an import error
-*ImportErrorApi* | [**get_import_error**](docs/ImportErrorApi.md#get_import_error) | **GET** /importErrors/{import_error_id} | Get an import errors
-*ImportErrorApi* | [**get_import_errors**](docs/ImportErrorApi.md#get_import_errors) | **GET** /importErrors | Get all import errors
-*PoolApi* | [**create_pool**](docs/PoolApi.md#create_pool) | **POST** /pools | Create a pool
-*PoolApi* | [**delete_pool**](docs/PoolApi.md#delete_pool) | **DELETE** /pools/{pool_id} | Delete a pool
-*PoolApi* | [**get_pool**](docs/PoolApi.md#get_pool) | **GET** /pools/{pool_id} | Get a pool
-*PoolApi* | [**get_pools**](docs/PoolApi.md#get_pools) | **GET** /pools | Get all pools
-*PoolApi* | [**get_task_instances**](docs/PoolApi.md#get_task_instances) | **GET** /dags/{dag_id}/taskInstances | Get list of task instance of DAG.
-*PoolApi* | [**upadte_pool**](docs/PoolApi.md#upadte_pool) | **PATCH** /pools/{pool_id} | Update a pool
-*TaskInstanceApi* | [**delete_task_instance**](docs/TaskInstanceApi.md#delete_task_instance) | **DELETE** /dags/{dag_id}/taskInstances/{task_id}/{execution_date} | Delete DAG Run
-*TaskInstanceApi* | [**get_extra_links**](docs/TaskInstanceApi.md#get_extra_links) | **GET** /dags/{dag_id}/taskInstances/{task_id}/{execution_date}/links | Get extra links for task instance
-*TaskInstanceApi* | [**get_logs**](docs/TaskInstanceApi.md#get_logs) | **GET** /dags/{dag_id}/taskInstances/{task_id}/{execution_date}/logs/{task_try_number} | Get logs for specific task instance
-*TaskInstanceApi* | [**get_task_instance**](docs/TaskInstanceApi.md#get_task_instance) | **GET** /dags/{dag_id}/taskInstances/{task_id}/{execution_date} | Get a task instance
-*TaskInstanceApi* | [**update_task_instance**](docs/TaskInstanceApi.md#update_task_instance) | **PATCH** /dags/{dag_id}/taskInstances/{task_id}/{execution_date} | Update a task instance
-*VariableApi* | [**create_variable**](docs/VariableApi.md#create_variable) | **POST** /variables | Create a variables
-*VariableApi* | [**delete_variable**](docs/VariableApi.md#delete_variable) | **DELETE** /variables/{variable_id} | Delete variable
-*VariableApi* | [**get_variable**](docs/VariableApi.md#get_variable) | **GET** /variables/{variable_id} | Get a variables by id
-*VariableApi* | [**get_variables**](docs/VariableApi.md#get_variables) | **GET** /variables | Get all variables
-*VariableApi* | [**lookup_variable**](docs/VariableApi.md#lookup_variable) | **GET** /variables/lookup | Get variable using its key.
-*VariableApi* | [**update_variable**](docs/VariableApi.md#update_variable) | **PATCH** /variables/{variable_id} | Update a variable by id
-*XComApi* | [**delete_x_com_value**](docs/XComApi.md#delete_x_com_value) | **DELETE** /dags/{dag_id}/taskInstances/{task_id}/{execution_date}/xcomValues/{key} | Delete an XCom entry
-*XComApi* | [**get_x_com_value**](docs/XComApi.md#get_x_com_value) | **GET** /dags/{dag_id}/taskInstances/{task_id}/{execution_date}/xcomValues/{key} | Get an XCom entry
-*XComApi* | [**get_x_com_values**](docs/XComApi.md#get_x_com_values) | **GET** /dags/{dag_id}/taskInstances/{task_id}/{execution_date}/xcomValues | Get all XCom values
-*XComApi* | [**update_x_com_value**](docs/XComApi.md#update_x_com_value) | **PATCH** /dags/{dag_id}/taskInstances/{task_id}/{execution_date}/xcomValues/{key} | Update an XCom entry
-*XComApi* | [**update_x_com_values**](docs/XComApi.md#update_x_com_values) | **POST** /dags/{dag_id}/taskInstances/{task_id}/{execution_date}/xcomValues | Create an XCom entry
+*DAGApi* | [**patch_dag**](docs/DAGApi.md#patch_dag) | **PATCH** /dags/{dag_id} | Update a DAG
+*DAGApi* | [**post_clear_task_instances**](docs/DAGApi.md#post_clear_task_instances) | **POST** /dags/{dag_id}/clearTaskInstances | Clear a set of task instances
+*DAGApi* | [**post_set_task_instances_state**](docs/DAGApi.md#post_set_task_instances_state) | **POST** /dags/{dag_id}/updateTaskInstancesState | Set a state of task instances
+*DAGRunApi* | [**delete_dag_run**](docs/DAGRunApi.md#delete_dag_run) | **DELETE** /dags/{dag_id}/dagRuns/{dag_run_id} | Delete a DAG run
+*DAGRunApi* | [**get_dag_run**](docs/DAGRunApi.md#get_dag_run) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id} | Get a DAG run
+*DAGRunApi* | [**get_dag_runs**](docs/DAGRunApi.md#get_dag_runs) | **GET** /dags/{dag_id}/dagRuns | List DAG runs
+*DAGRunApi* | [**get_dag_runs_batch**](docs/DAGRunApi.md#get_dag_runs_batch) | **POST** /dags/~/dagRuns/list | List DAG runs (batch)
+*DAGRunApi* | [**post_dag_run**](docs/DAGRunApi.md#post_dag_run) | **POST** /dags/{dag_id}/dagRuns | Trigger a new DAG run
+*EventLogApi* | [**get_event_log**](docs/EventLogApi.md#get_event_log) | **GET** /eventLogs/{event_log_id} | Get a log entry
+*EventLogApi* | [**get_event_logs**](docs/EventLogApi.md#get_event_logs) | **GET** /eventLogs | List log entries
+*ImportErrorApi* | [**get_import_error**](docs/ImportErrorApi.md#get_import_error) | **GET** /importErrors/{import_error_id} | Get an import error
+*ImportErrorApi* | [**get_import_errors**](docs/ImportErrorApi.md#get_import_errors) | **GET** /importErrors | List import errors
+*MonitoringApi* | [**get_health**](docs/MonitoringApi.md#get_health) | **GET** /health | Get a instance status
+*MonitoringApi* | [**get_version**](docs/MonitoringApi.md#get_version) | **GET** /version | Get version information
+*PoolApi* | [**delete_pool**](docs/PoolApi.md#delete_pool) | **DELETE** /pools/{pool_name} | Delete a pool
+*PoolApi* | [**get_pool**](docs/PoolApi.md#get_pool) | **GET** /pools/{pool_name} | Get a pool
+*PoolApi* | [**get_pools**](docs/PoolApi.md#get_pools) | **GET** /pools | List pools
+*PoolApi* | [**patch_pool**](docs/PoolApi.md#patch_pool) | **PATCH** /pools/{pool_name} | Update a pool
+*PoolApi* | [**post_pool**](docs/PoolApi.md#post_pool) | **POST** /pools | Create a pool
+*TaskInstanceApi* | [**get_extra_links**](docs/TaskInstanceApi.md#get_extra_links) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/links | List extra links
+*TaskInstanceApi* | [**get_log**](docs/TaskInstanceApi.md#get_log) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/logs/{task_try_number} | Get logs
+*TaskInstanceApi* | [**get_task_instance**](docs/TaskInstanceApi.md#get_task_instance) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id} | Get a task instance
+*TaskInstanceApi* | [**get_task_instances**](docs/TaskInstanceApi.md#get_task_instances) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances | List task instances
+*TaskInstanceApi* | [**get_task_instances_batch**](docs/TaskInstanceApi.md#get_task_instances_batch) | **POST** /dags/~/dagRuns/~/taskInstances/list | List task instances (batch)
+*VariableApi* | [**delete_variable**](docs/VariableApi.md#delete_variable) | **DELETE** /variables/{variable_key} | Delete a variable
+*VariableApi* | [**get_variable**](docs/VariableApi.md#get_variable) | **GET** /variables/{variable_key} | Get a variable
+*VariableApi* | [**get_variables**](docs/VariableApi.md#get_variables) | **GET** /variables | List variables
+*VariableApi* | [**patch_variable**](docs/VariableApi.md#patch_variable) | **PATCH** /variables/{variable_key} | Update a variable
+*VariableApi* | [**post_variables**](docs/VariableApi.md#post_variables) | **POST** /variables | Create a variable
+*XComApi* | [**get_xcom_entries**](docs/XComApi.md#get_xcom_entries) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/xcomEntries | List XCom entries
+*XComApi* | [**get_xcom_entry**](docs/XComApi.md#get_xcom_entry) | **GET** /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/xcomEntries/{xcom_key} | Get an XCom entry
 
 
 ## Documentation For Models
@@ -160,31 +356,35 @@ Class | Method | HTTP request | Description
  - [CronExpression](docs/CronExpression.md)
  - [DAG](docs/DAG.md)
  - [DAGCollection](docs/DAGCollection.md)
+ - [DAGDetail](docs/DAGDetail.md)
+ - [DAGDetailAllOf](docs/DAGDetailAllOf.md)
  - [DAGRun](docs/DAGRun.md)
  - [DAGRunCollection](docs/DAGRunCollection.md)
  - [DagState](docs/DagState.md)
- - [DagStructure](docs/DagStructure.md)
- - [DagStructureCollection](docs/DagStructureCollection.md)
  - [Error](docs/Error.md)
  - [EventLog](docs/EventLog.md)
  - [EventLogCollection](docs/EventLogCollection.md)
  - [ExtraLink](docs/ExtraLink.md)
  - [ExtraLinkCollection](docs/ExtraLinkCollection.md)
+ - [HealthInfo](docs/HealthInfo.md)
+ - [HealthStatus](docs/HealthStatus.md)
  - [ImportError](docs/ImportError.md)
  - [ImportErrorCollection](docs/ImportErrorCollection.md)
  - [InlineResponse200](docs/InlineResponse200.md)
  - [InlineResponse2001](docs/InlineResponse2001.md)
+ - [ListDagRunsForm](docs/ListDagRunsForm.md)
+ - [ListTaskInstanceForm](docs/ListTaskInstanceForm.md)
+ - [MetadatabaseStatus](docs/MetadatabaseStatus.md)
  - [Pool](docs/Pool.md)
  - [PoolCollection](docs/PoolCollection.md)
  - [RelativeDelta](docs/RelativeDelta.md)
  - [SLAMiss](docs/SLAMiss.md)
- - [SLAMissCollection](docs/SLAMissCollection.md)
  - [ScheduleInterval](docs/ScheduleInterval.md)
+ - [SchedulerStatus](docs/SchedulerStatus.md)
  - [Tag](docs/Tag.md)
  - [Task](docs/Task.md)
  - [TaskCollection](docs/TaskCollection.md)
  - [TaskExtraLinks](docs/TaskExtraLinks.md)
- - [TaskFail](docs/TaskFail.md)
  - [TaskInstance](docs/TaskInstance.md)
  - [TaskInstanceCollection](docs/TaskInstanceCollection.md)
  - [TaskInstanceReference](docs/TaskInstanceReference.md)
@@ -197,8 +397,10 @@ Class | Method | HTTP request | Description
  - [VariableAllOf](docs/VariableAllOf.md)
  - [VariableCollection](docs/VariableCollection.md)
  - [VariableCollectionItem](docs/VariableCollectionItem.md)
+ - [VersionInfo](docs/VersionInfo.md)
  - [WeightRule](docs/WeightRule.md)
  - [XCom](docs/XCom.md)
+ - [XComAllOf](docs/XComAllOf.md)
  - [XComCollection](docs/XComCollection.md)
  - [XComCollectionItem](docs/XComCollectionItem.md)
 
@@ -206,9 +408,13 @@ Class | Method | HTTP request | Description
 ## Documentation For Authorization
 
 
-## basicAuth
+## Basic
 
 - **Type**: HTTP basic authentication
+
+
+## Kerberos
+
 
 
 ## Author

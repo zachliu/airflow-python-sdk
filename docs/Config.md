@@ -1,5 +1,6 @@
 # Config
 
+The configuration.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

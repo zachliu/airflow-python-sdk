@@ -1,7 +1,7 @@
 """
     Airflow API (Stable)
 
-    Apache Airflow management API.  # noqa: E501
+    # Overview  To facilitate management, the Apache Airflow supports a range of REST API endpoints across its objects. This section provides an overview of the API design, methods, and supported use cases.  Most of the endpoints accept `JSON` as input and return `JSON` responses. This means that you must usually add the following headers to your request: ``` Content-type: application/json Accept: application/json ```  ## Resources  The term `resource` refers to a single type of object in the Airflow metadata. An API is broken up by its endpoint's corresponding resource. The name of a resource is typically plural and expressed in camelCase. Example: `dagRuns`.  Resource names are used as part of endpoint URLs, as well as in API parameters and responses.  ## CRUD Operations  The platform supports **C**reate, **R**ead, **U**pdate, and **D**elete operations on most resources. You can review the standards for these operations and their standard parameters below.  Some endpoints have special behavior as exceptions.  ### Create  To create a resource, you typically submit an HTTP `POST` request with the resource's required metadata in the request body. The response returns a `201 Created` response code upon success with the resource's metadata, including its internal `id`, in the response body.  ### Read  An HTTP `GET` request can be used to read a resource or to list a number of resources.  A resource's `id` can be submitted in the request parameters to read a specific resource. The response usually returns a `200 OK` response code upon success, with the resource's metadata in the response body.  If a `GET` request does not include a specific resource `id`, it is treated as a list request. The response usually returns a `200 OK` response code upon success, with an object containing a list of resources' metadata in the response body.  When reading resources, some common query parameters are usually available. e.g.: ``` v1/connections?limit=25&offset=25 ```  |Query Parameter|Type|Description| |---------------|----|-----------| |limit|integer|Maximum number of objects to fetch. Usually 25 by default| |offset|integer|Offset after which to start returning objects. For use with limit query parameter.|  ### Update  Updating a resource requires the resource `id`, and is typically done using an HTTP `PATCH` request, with the fields to modify in the request body. The response usually returns a `200 OK` response code upon success, with information about the modified resource in the response body.  ### Delete  Deleting a resource requires the resource `id` and is typically executing via an HTTP `DELETE` request. The response usually returns a `204 No Content` response code upon success.  ## Conventions  - Resource names are plural and expressed in camelCase. - Names are consistent between URL parameter name and field name.  - Field names are in snake_case. ```json {     \"name\": \"string\",     \"slots\": 0,     \"occupied_slots\": 0,     \"used_slots\": 0,     \"queued_slots\": 0,     \"open_slots\": 0 } ```  ### Update Mask  Update mask is available as a query parameter in patch endpoints. It is used to notify the API which fields you want to update. Using `update_mask` makes it easier to update objects by helping the server know which fields to update in an object instead of updating all fields. The update request ignores any fields that aren't specified in the field mask, leaving them with their current values.  Example: ```   resource = request.get('/resource/my-id').json()   resource['my_field'] = 'new-value'   request.patch('/resource/my-id?update_mask=my_field', data=json.dumps(resource)) ```  ## Versioning and Endpoint Lifecycle  - API versioning is not synchronized to specific releases of the Apache Airflow. - APIs are designed to be backward compatible. - Any changes to the API will first go through a deprecation phase.  # Summary of Changes  | Airflow version | Description | |-|-| | v2.0 | Initial releaase |  # Trying the API  You can use a third party client, such as [curl](https://curl.haxx.se/), [HTTPie](https://httpie.org/), [Postman](https://www.postman.com/) or [the Insomnia rest client](https://insomnia.rest/) to test the Apache Airflow API.  Note that you will need to pass credentials data.  For e.g., here is how to pause a DAG with [curl](https://curl.haxx.se/), when basic authorization is used: ```bash curl -X POST 'https://example.com/api/v1/dags/{dag_id}?update_mask=is_paused' \\ -H 'Content-Type: application/json' \\ --user \"username:password\" \\ -d '{     \"is_paused\": true }' ```  Using a graphical tool such as [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/), it is possible to import the API specifications directly:  1. Download the API specification by clicking the **Download** button at top of this document 2. Import the JSON specification in the graphical tool of your choice.   - In *Postman*, you can click the **import** button at the top   - With *Insomnia*, you can just drag-and-drop the file on the UI  Note that with *Postman*, you can also generate code snippets by selecting a request and clicking on the **Code** button.  # Authentication  To be able to meet the requirements of many organizations, Airflow supports many authentication methods, and it is even possible to add your own method.  If you want to check which auth backend is currently set, you can use `airflow config get-value api auth_backend` command as in the example below. ```bash $ airflow config get-value api auth_backend airflow.api.auth.backend.basic_auth ``` The default is to deny all requests.  For details on configuring the authentication, see [API Authorization](https://airflow.apache.org/docs/stable/security/api.html).  # Errors  We follow the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs.  As with our normal API responses, your client must be prepared to gracefully handle additional members of the response.  ## Unauthenticated  This indicates that the request has not been applied because it lacks valid authentication credentials for the target resource. Please check that you have valid credentials.  ## PermissionDenied  This response means that the server understood the request but refuses to authorize it because it lacks sufficient rights to the resource. It happens when you do not have the necessary permission to execute the action you performed. You need to get the appropriate permissions in other to resolve this error.  ## BadRequest  This response means that the server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing). To resolve this, please ensure that your syntax is correct.  ## NotFound  This client error response indicates that the server cannot find the requested resource.  ## MethodNotAllowed  Indicates that the request method is known by the server but is not supported by the target resource.  ## NotAcceptable  The target resource does not have a current representation that would be acceptable to the user agent, according to the proactive negotiation header fields received in the request, and the server is unwilling to supply a default representation.  ## AlreadyExists  The request could not be completed due to a conflict with the current state of the target resource, meaning that the resource already exists  ## Unknown  This means that the server encountered an unexpected condition that prevented it from fulfilling the request.   # noqa: E501
 
     The version of the OpenAPI document: 1.0.0
     Contact: zach.z.liu@gmail.com
@@ -25,7 +25,7 @@ from airflow_python_sdk.model_utils import (  # noqa: F401
 from airflow_python_sdk.model.clear_task_instance import ClearTaskInstance
 from airflow_python_sdk.model.dag import DAG
 from airflow_python_sdk.model.dag_collection import DAGCollection
-from airflow_python_sdk.model.dag_structure import DagStructure
+from airflow_python_sdk.model.dag_detail import DAGDetail
 from airflow_python_sdk.model.error import Error
 from airflow_python_sdk.model.inline_response2001 import InlineResponse2001
 from airflow_python_sdk.model.task import Task
@@ -46,136 +46,6 @@ class DAGApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-        def __clear_task_instances(
-            self,
-            dag_id,
-            clear_task_instance,
-            **kwargs
-        ):
-            """Clear a set of task instances  # noqa: E501
-
-            Clears a set of task instances associated with the DAG for a specified date range.   # noqa: E501
-            This method makes a synchronous HTTP request by default. To make an
-            asynchronous HTTP request, please pass async_req=True
-
-            >>> thread = api.clear_task_instances(dag_id, clear_task_instance, async_req=True)
-            >>> result = thread.get()
-
-            Args:
-                dag_id (str): The DAG ID.
-                clear_task_instance (ClearTaskInstance): Parameters of action
-
-            Keyword Args:
-                _return_http_data_only (bool): response data without head status
-                    code and headers. Default is True.
-                _preload_content (bool): if False, the urllib3.HTTPResponse object
-                    will be returned without reading/decoding response data.
-                    Default is True.
-                _request_timeout (float/tuple): timeout setting for this request. If one
-                    number provided, it will be total request timeout. It can also
-                    be a pair (tuple) of (connection, read) timeouts.
-                    Default is None.
-                _check_input_type (bool): specifies if type checking
-                    should be done one the data sent to the server.
-                    Default is True.
-                _check_return_type (bool): specifies if type checking
-                    should be done one the data received from the server.
-                    Default is True.
-                _host_index (int/None): specifies the index of the server
-                    that we want to use.
-                    Default is read from the configuration.
-                async_req (bool): execute request asynchronously
-
-            Returns:
-                TaskInstanceReferenceCollection
-                    If the method is called asynchronously, returns the request
-                    thread.
-            """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
-            )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['dag_id'] = \
-                dag_id
-            kwargs['clear_task_instance'] = \
-                clear_task_instance
-            return self.call_with_http_info(**kwargs)
-
-        self.clear_task_instances = Endpoint(
-            settings={
-                'response_type': (TaskInstanceReferenceCollection,),
-                'auth': [
-                    'basicAuth'
-                ],
-                'endpoint_path': '/dags/{dag_id}/clearTaskInstances',
-                'operation_id': 'clear_task_instances',
-                'http_method': 'POST',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'dag_id',
-                    'clear_task_instance',
-                ],
-                'required': [
-                    'dag_id',
-                    'clear_task_instance',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'dag_id':
-                        (str,),
-                    'clear_task_instance':
-                        (ClearTaskInstance,),
-                },
-                'attribute_map': {
-                    'dag_id': 'dag_id',
-                },
-                'location_map': {
-                    'dag_id': 'path',
-                    'clear_task_instance': 'body',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
-            },
-            api_client=api_client,
-            callable=__clear_task_instances
-        )
-
         def __get_dag(
             self,
             dag_id,
@@ -183,7 +53,7 @@ class DAGApi(object):
         ):
             """Get basic information about a DAG  # noqa: E501
 
-            Presents only information available at database (DAGModel).  # noqa: E501
+            Presents only information available in database (DAGModel). If you need detailed information, consider using GET /dags/{dag_id}/detail.   # noqa: E501
             This method makes a synchronous HTTP request by default. To make an
             asynchronous HTTP request, please pass async_req=True
 
@@ -246,7 +116,7 @@ class DAGApi(object):
             settings={
                 'response_type': (DAG,),
                 'auth': [
-                    'basicAuth'
+                    'Basic'
                 ],
                 'endpoint_path': '/dags/{dag_id}',
                 'operation_id': 'get_dag',
@@ -295,13 +165,133 @@ class DAGApi(object):
             callable=__get_dag
         )
 
+        def __get_dag_details(
+            self,
+            dag_id,
+            **kwargs
+        ):
+            """Get a simplified representation of DAG  # noqa: E501
+
+            The response contains many DAG attributes, so the response can be large. If possible, consider using GET /dags/{dag_id}.   # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
+
+            >>> thread = api.get_dag_details(dag_id, async_req=True)
+            >>> result = thread.get()
+
+            Args:
+                dag_id (str): The DAG ID.
+
+            Keyword Args:
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
+
+            Returns:
+                DAGDetail
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['dag_id'] = \
+                dag_id
+            return self.call_with_http_info(**kwargs)
+
+        self.get_dag_details = Endpoint(
+            settings={
+                'response_type': (DAGDetail,),
+                'auth': [
+                    'Basic'
+                ],
+                'endpoint_path': '/dags/{dag_id}/details',
+                'operation_id': 'get_dag_details',
+                'http_method': 'GET',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'dag_id',
+                ],
+                'required': [
+                    'dag_id',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'dag_id':
+                        (str,),
+                },
+                'attribute_map': {
+                    'dag_id': 'dag_id',
+                },
+                'location_map': {
+                    'dag_id': 'path',
+                },
+                'collection_format_map': {
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [],
+            },
+            api_client=api_client,
+            callable=__get_dag_details
+        )
+
         def __get_dag_source(
             self,
             file_token,
             **kwargs
         ):
-            """Get source code using file token  # noqa: E501
+            """Get a source code  # noqa: E501
 
+            Get a source code using file token.   # noqa: E501
             This method makes a synchronous HTTP request by default. To make an
             asynchronous HTTP request, please pass async_req=True
 
@@ -309,7 +299,7 @@ class DAGApi(object):
             >>> result = thread.get()
 
             Args:
-                file_token (str): The key containing the encrypted path to the file. Encryption and encryption takes place only on the server side. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change. 
+                file_token (str): The key containing the encrypted path to the file. Encryption and decryption take place only on the server. This prevents the client from reading an non-DAG file. This also ensures API extensibility, because the format of encrypted data may change. 
 
             Keyword Args:
                 _return_http_data_only (bool): response data without head status
@@ -364,7 +354,7 @@ class DAGApi(object):
             settings={
                 'response_type': (InlineResponse2001,),
                 'auth': [
-                    'basicAuth'
+                    'Basic'
                 ],
                 'endpoint_path': '/dagSources/{file_token}',
                 'operation_id': 'get_dag_source',
@@ -405,7 +395,8 @@ class DAGApi(object):
             },
             headers_map={
                 'accept': [
-                    'application/json'
+                    'application/json',
+                    'plain/text'
                 ],
                 'content_type': [],
             },
@@ -413,129 +404,11 @@ class DAGApi(object):
             callable=__get_dag_source
         )
 
-        def __get_dag_structure(
-            self,
-            dag_id,
-            **kwargs
-        ):
-            """Get simplified representation of DAG.  # noqa: E501
-
-            This method makes a synchronous HTTP request by default. To make an
-            asynchronous HTTP request, please pass async_req=True
-
-            >>> thread = api.get_dag_structure(dag_id, async_req=True)
-            >>> result = thread.get()
-
-            Args:
-                dag_id (str): The DAG ID.
-
-            Keyword Args:
-                _return_http_data_only (bool): response data without head status
-                    code and headers. Default is True.
-                _preload_content (bool): if False, the urllib3.HTTPResponse object
-                    will be returned without reading/decoding response data.
-                    Default is True.
-                _request_timeout (float/tuple): timeout setting for this request. If one
-                    number provided, it will be total request timeout. It can also
-                    be a pair (tuple) of (connection, read) timeouts.
-                    Default is None.
-                _check_input_type (bool): specifies if type checking
-                    should be done one the data sent to the server.
-                    Default is True.
-                _check_return_type (bool): specifies if type checking
-                    should be done one the data received from the server.
-                    Default is True.
-                _host_index (int/None): specifies the index of the server
-                    that we want to use.
-                    Default is read from the configuration.
-                async_req (bool): execute request asynchronously
-
-            Returns:
-                DagStructure
-                    If the method is called asynchronously, returns the request
-                    thread.
-            """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
-            )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['dag_id'] = \
-                dag_id
-            return self.call_with_http_info(**kwargs)
-
-        self.get_dag_structure = Endpoint(
-            settings={
-                'response_type': (DagStructure,),
-                'auth': [
-                    'basicAuth'
-                ],
-                'endpoint_path': '/dags/{dag_id}/structure',
-                'operation_id': 'get_dag_structure',
-                'http_method': 'GET',
-                'servers': None,
-            },
-            params_map={
-                'all': [
-                    'dag_id',
-                ],
-                'required': [
-                    'dag_id',
-                ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
-            },
-            root_map={
-                'validations': {
-                },
-                'allowed_values': {
-                },
-                'openapi_types': {
-                    'dag_id':
-                        (str,),
-                },
-                'attribute_map': {
-                    'dag_id': 'dag_id',
-                },
-                'location_map': {
-                    'dag_id': 'path',
-                },
-                'collection_format_map': {
-                }
-            },
-            headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
-            },
-            api_client=api_client,
-            callable=__get_dag_structure
-        )
-
         def __get_dags(
             self,
             **kwargs
         ):
-            """Get all DAGs  # noqa: E501
+            """List DAGs  # noqa: E501
 
             This method makes a synchronous HTTP request by default. To make an
             asynchronous HTTP request, please pass async_req=True
@@ -597,7 +470,7 @@ class DAGApi(object):
             settings={
                 'response_type': (DAGCollection,),
                 'auth': [
-                    'basicAuth'
+                    'Basic'
                 ],
                 'endpoint_path': '/dags',
                 'operation_id': 'get_dags',
@@ -615,16 +488,11 @@ class DAGApi(object):
                 'enum': [
                 ],
                 'validation': [
-                    'limit',
                     'offset',
                 ]
             },
             root_map={
                 'validations': {
-                    ('limit',): {
-
-                        'inclusive_minimum': 1,
-                    },
                     ('offset',): {
 
                         'inclusive_minimum': 0,
@@ -665,7 +533,7 @@ class DAGApi(object):
             task_id,
             **kwargs
         ):
-            """Get simplified representation of a task.  # noqa: E501
+            """Get simplified representation of a task  # noqa: E501
 
             This method makes a synchronous HTTP request by default. To make an
             asynchronous HTTP request, please pass async_req=True
@@ -675,7 +543,7 @@ class DAGApi(object):
 
             Args:
                 dag_id (str): The DAG ID.
-                task_id (int): The Task ID.
+                task_id (str): The task ID.
 
             Keyword Args:
                 _return_http_data_only (bool): response data without head status
@@ -732,7 +600,7 @@ class DAGApi(object):
             settings={
                 'response_type': (Task,),
                 'auth': [
-                    'basicAuth'
+                    'Basic'
                 ],
                 'endpoint_path': '/dags/{dag_id}/tasks/{task_id}',
                 'operation_id': 'get_task',
@@ -764,7 +632,7 @@ class DAGApi(object):
                     'dag_id':
                         (str,),
                     'task_id':
-                        (int,),
+                        (str,),
                 },
                 'attribute_map': {
                     'dag_id': 'dag_id',
@@ -856,7 +724,7 @@ class DAGApi(object):
             settings={
                 'response_type': (TaskCollection,),
                 'auth': [
-                    'basicAuth'
+                    'Basic'
                 ],
                 'endpoint_path': '/dags/{dag_id}/tasks',
                 'operation_id': 'get_tasks',
@@ -905,23 +773,26 @@ class DAGApi(object):
             callable=__get_tasks
         )
 
-        def __update_dag(
+        def __patch_dag(
             self,
             dag_id,
+            dag,
             **kwargs
         ):
-            """Update the specific DAG  # noqa: E501
+            """Update a DAG  # noqa: E501
 
             This method makes a synchronous HTTP request by default. To make an
             asynchronous HTTP request, please pass async_req=True
 
-            >>> thread = api.update_dag(dag_id, async_req=True)
+            >>> thread = api.patch_dag(dag_id, dag, async_req=True)
             >>> result = thread.get()
 
             Args:
                 dag_id (str): The DAG ID.
+                dag (DAG):
 
             Keyword Args:
+                update_mask ([str]): The fields to update on the connection (connection, pool etc). If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields. . [optional]
                 _return_http_data_only (bool): response data without head status
                     code and headers. Default is True.
                 _preload_content (bool): if False, the urllib3.HTTPResponse object
@@ -968,25 +839,30 @@ class DAGApi(object):
             kwargs['_host_index'] = kwargs.get('_host_index')
             kwargs['dag_id'] = \
                 dag_id
+            kwargs['dag'] = \
+                dag
             return self.call_with_http_info(**kwargs)
 
-        self.update_dag = Endpoint(
+        self.patch_dag = Endpoint(
             settings={
                 'response_type': (DAG,),
                 'auth': [
-                    'basicAuth'
+                    'Basic'
                 ],
                 'endpoint_path': '/dags/{dag_id}',
-                'operation_id': 'update_dag',
+                'operation_id': 'patch_dag',
                 'http_method': 'PATCH',
                 'servers': None,
             },
             params_map={
                 'all': [
                     'dag_id',
+                    'dag',
+                    'update_mask',
                 ],
                 'required': [
                     'dag_id',
+                    'dag',
                 ],
                 'nullable': [
                 ],
@@ -1003,12 +879,150 @@ class DAGApi(object):
                 'openapi_types': {
                     'dag_id':
                         (str,),
+                    'dag':
+                        (DAG,),
+                    'update_mask':
+                        ([str],),
+                },
+                'attribute_map': {
+                    'dag_id': 'dag_id',
+                    'update_mask': 'update_mask',
+                },
+                'location_map': {
+                    'dag_id': 'path',
+                    'dag': 'body',
+                    'update_mask': 'query',
+                },
+                'collection_format_map': {
+                    'update_mask': 'csv',
+                }
+            },
+            headers_map={
+                'accept': [
+                    'application/json'
+                ],
+                'content_type': [
+                    'application/json'
+                ]
+            },
+            api_client=api_client,
+            callable=__patch_dag
+        )
+
+        def __post_clear_task_instances(
+            self,
+            dag_id,
+            clear_task_instance,
+            **kwargs
+        ):
+            """Clear a set of task instances  # noqa: E501
+
+            Clears a set of task instances associated with the DAG for a specified date range.   # noqa: E501
+            This method makes a synchronous HTTP request by default. To make an
+            asynchronous HTTP request, please pass async_req=True
+
+            >>> thread = api.post_clear_task_instances(dag_id, clear_task_instance, async_req=True)
+            >>> result = thread.get()
+
+            Args:
+                dag_id (str): The DAG ID.
+                clear_task_instance (ClearTaskInstance): Parameters of action
+
+            Keyword Args:
+                _return_http_data_only (bool): response data without head status
+                    code and headers. Default is True.
+                _preload_content (bool): if False, the urllib3.HTTPResponse object
+                    will be returned without reading/decoding response data.
+                    Default is True.
+                _request_timeout (float/tuple): timeout setting for this request. If one
+                    number provided, it will be total request timeout. It can also
+                    be a pair (tuple) of (connection, read) timeouts.
+                    Default is None.
+                _check_input_type (bool): specifies if type checking
+                    should be done one the data sent to the server.
+                    Default is True.
+                _check_return_type (bool): specifies if type checking
+                    should be done one the data received from the server.
+                    Default is True.
+                _host_index (int/None): specifies the index of the server
+                    that we want to use.
+                    Default is read from the configuration.
+                async_req (bool): execute request asynchronously
+
+            Returns:
+                TaskInstanceReferenceCollection
+                    If the method is called asynchronously, returns the request
+                    thread.
+            """
+            kwargs['async_req'] = kwargs.get(
+                'async_req', False
+            )
+            kwargs['_return_http_data_only'] = kwargs.get(
+                '_return_http_data_only', True
+            )
+            kwargs['_preload_content'] = kwargs.get(
+                '_preload_content', True
+            )
+            kwargs['_request_timeout'] = kwargs.get(
+                '_request_timeout', None
+            )
+            kwargs['_check_input_type'] = kwargs.get(
+                '_check_input_type', True
+            )
+            kwargs['_check_return_type'] = kwargs.get(
+                '_check_return_type', True
+            )
+            kwargs['_host_index'] = kwargs.get('_host_index')
+            kwargs['dag_id'] = \
+                dag_id
+            kwargs['clear_task_instance'] = \
+                clear_task_instance
+            return self.call_with_http_info(**kwargs)
+
+        self.post_clear_task_instances = Endpoint(
+            settings={
+                'response_type': (TaskInstanceReferenceCollection,),
+                'auth': [
+                    'Basic'
+                ],
+                'endpoint_path': '/dags/{dag_id}/clearTaskInstances',
+                'operation_id': 'post_clear_task_instances',
+                'http_method': 'POST',
+                'servers': None,
+            },
+            params_map={
+                'all': [
+                    'dag_id',
+                    'clear_task_instance',
+                ],
+                'required': [
+                    'dag_id',
+                    'clear_task_instance',
+                ],
+                'nullable': [
+                ],
+                'enum': [
+                ],
+                'validation': [
+                ]
+            },
+            root_map={
+                'validations': {
+                },
+                'allowed_values': {
+                },
+                'openapi_types': {
+                    'dag_id':
+                        (str,),
+                    'clear_task_instance':
+                        (ClearTaskInstance,),
                 },
                 'attribute_map': {
                     'dag_id': 'dag_id',
                 },
                 'location_map': {
                     'dag_id': 'path',
+                    'clear_task_instance': 'body',
                 },
                 'collection_format_map': {
                 }
@@ -1017,13 +1031,15 @@ class DAGApi(object):
                 'accept': [
                     'application/json'
                 ],
-                'content_type': [],
+                'content_type': [
+                    'application/json'
+                ]
             },
             api_client=api_client,
-            callable=__update_dag
+            callable=__post_clear_task_instances
         )
 
-        def __update_task_instances_state(
+        def __post_set_task_instances_state(
             self,
             dag_id,
             update_task_instances_state,
@@ -1035,7 +1051,7 @@ class DAGApi(object):
             This method makes a synchronous HTTP request by default. To make an
             asynchronous HTTP request, please pass async_req=True
 
-            >>> thread = api.update_task_instances_state(dag_id, update_task_instances_state, async_req=True)
+            >>> thread = api.post_set_task_instances_state(dag_id, update_task_instances_state, async_req=True)
             >>> result = thread.get()
 
             Args:
@@ -1093,14 +1109,14 @@ class DAGApi(object):
                 update_task_instances_state
             return self.call_with_http_info(**kwargs)
 
-        self.update_task_instances_state = Endpoint(
+        self.post_set_task_instances_state = Endpoint(
             settings={
                 'response_type': (TaskInstanceReferenceCollection,),
                 'auth': [
-                    'basicAuth'
+                    'Basic'
                 ],
                 'endpoint_path': '/dags/{dag_id}/updateTaskInstancesState',
-                'operation_id': 'update_task_instances_state',
+                'operation_id': 'post_set_task_instances_state',
                 'http_method': 'POST',
                 'servers': None,
             },
@@ -1150,5 +1166,5 @@ class DAGApi(object):
                 ]
             },
             api_client=api_client,
-            callable=__update_task_instances_state
+            callable=__post_set_task_instances_state
         )

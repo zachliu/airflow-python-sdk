@@ -1,5 +1,6 @@
 # ClassReference
 
+Class reference
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
