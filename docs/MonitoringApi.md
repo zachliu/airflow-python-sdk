@@ -4,16 +4,16 @@ All URIs are relative to *http://localhost/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_health**](MonitoringApi.md#get_health) | **GET** /health | Get a instance status
+[**get_health**](MonitoringApi.md#get_health) | **GET** /health | Get instance status
 [**get_version**](MonitoringApi.md#get_version) | **GET** /version | Get version information
 
 
 # **get_health**
 > HealthInfo get_health()
 
-Get a instance status
+Get instance status
 
-Get the status of Airflow's metadatabase and scheduler. It incluse info about metadatabase and last heartbeat of scheduler. 
+Get the status of Airflow's metadatabase and scheduler. It includes info about metadatabase and last heartbeat of scheduler. 
 
 ### Example
 
@@ -48,7 +48,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
 
     # example, this endpoint has no required or optional parameters
     try:
-        # Get a instance status
+        # Get instance status
         api_response = api_instance.get_health()
         pprint(api_response)
     except airflow_python_sdk.ApiException as e:

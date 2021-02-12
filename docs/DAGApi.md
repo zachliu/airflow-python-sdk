@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 Get basic information about a DAG
 
-Presents only information available in database (DAGModel). If you need detailed information, consider using GET /dags/{dag_id}/detail. 
+Presents only information available in database (DAGModel). If you need detailed information, consider using GET /dags/{dag_id}/details. 
 
 ### Example
 
@@ -541,7 +541,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
     ) # DAG | 
     update_mask = [
         "update_mask_example",
-    ] # [str] | The fields to update on the connection (connection, pool etc). If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  (optional)
+    ] # [str] | The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  (optional)
 
     # example passing only required values which don't have defaults set
     try:
@@ -567,7 +567,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dag_id** | **str**| The DAG ID. |
  **dag** | [**DAG**](DAG.md)|  |
- **update_mask** | **[str]**| The fields to update on the connection (connection, pool etc). If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  | [optional]
+ **update_mask** | **[str]**| The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  | [optional]
 
 ### Return type
 

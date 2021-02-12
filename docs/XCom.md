@@ -1,6 +1,6 @@
 # XCom
 
-Full representaiton of XCom entry.
+Full representations of XCom entry.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
