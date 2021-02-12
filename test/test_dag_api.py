@@ -10,6 +10,8 @@
 
 
 import unittest
+from pprint import pprint
+from test.pretest import API_CLIENT
 
 import airflow_python_sdk
 from airflow_python_sdk.api.dag_api import DAGApi  # noqa: E501
@@ -19,7 +21,7 @@ class TestDAGApi(unittest.TestCase):
     """DAGApi unit test stubs"""
 
     def setUp(self):
-        self.api = DAGApi()  # noqa: E501
+        self.api = DAGApi(API_CLIENT)  # noqa: E501
 
     def tearDown(self):
         pass
@@ -29,7 +31,8 @@ class TestDAGApi(unittest.TestCase):
 
         Get basic information about a DAG  # noqa: E501
         """
-        pass
+        api_response = self.api.get_dag(dag_id="test_glue_partitions_sensor")
+        pprint(api_response)
 
     def test_get_dag_source(self):
         """Test case for get_dag_source
@@ -50,7 +53,8 @@ class TestDAGApi(unittest.TestCase):
 
         Get all DAGs  # noqa: E501
         """
-        pass
+        api_response = self.api.get_dags(limit=100, offset=0)
+        pprint(api_response)
 
     def test_get_task(self):
         """Test case for get_task

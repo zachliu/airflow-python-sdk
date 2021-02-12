@@ -10,6 +10,8 @@
 
 
 import unittest
+from pprint import pprint
+from test.pretest import API_CLIENT
 
 import airflow_python_sdk
 from airflow_python_sdk.api.monitoring_api import MonitoringApi  # noqa: E501
@@ -19,7 +21,7 @@ class TestMonitoringApi(unittest.TestCase):
     """MonitoringApi unit test stubs"""
 
     def setUp(self):
-        self.api = MonitoringApi()  # noqa: E501
+        self.api = MonitoringApi(API_CLIENT)  # noqa: E501
 
     def tearDown(self):
         pass
@@ -29,15 +31,17 @@ class TestMonitoringApi(unittest.TestCase):
 
         Get a instance status  # noqa: E501
         """
-        pass
+        api_response = self.api.get_health()
+        pprint(api_response)
 
     def test_get_version(self):
         """Test case for get_version
 
         Get version information  # noqa: E501
         """
-        pass
+        api_response = self.api.get_version()
+        pprint(api_response)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
