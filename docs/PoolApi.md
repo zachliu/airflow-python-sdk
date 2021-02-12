@@ -287,7 +287,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
     ) # Pool | 
     update_mask = [
         "update_mask_example",
-    ] # [str] | The fields to update on the connection (connection, pool etc). If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  (optional)
+    ] # [str] | The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  (optional)
 
     # example passing only required values which don't have defaults set
     try:
@@ -313,7 +313,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pool_name** | **str**| The pool name. |
  **pool** | [**Pool**](Pool.md)|  |
- **update_mask** | **[str]**| The fields to update on the connection (connection, pool etc). If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  | [optional]
+ **update_mask** | **[str]**| The fields to update on the resource. If absent or empty, all modifiable fields are updated. A comma-separated list of fully qualified names of fields.  | [optional]
 
 ### Return type
 
