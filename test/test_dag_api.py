@@ -11,7 +11,7 @@
 
 import unittest
 from pprint import pprint
-from test.pretest import API_CLIENT
+from test.conftest import API_CLIENT
 
 from airflow_python_sdk.api.dag_api import DAGApi  # noqa: E501
 

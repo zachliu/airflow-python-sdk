@@ -11,7 +11,7 @@
 
 import unittest
 from pprint import pprint
-from test.pretest import API_CLIENT
+from test.conftest import API_CLIENT
 
 import airflow_python_sdk
 from airflow_python_sdk.api.monitoring_api import MonitoringApi  # noqa: E501
