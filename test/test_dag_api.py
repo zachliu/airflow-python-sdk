@@ -13,7 +13,6 @@ import unittest
 from pprint import pprint
 from test.pretest import API_CLIENT
 
-import airflow_python_sdk
 from airflow_python_sdk.api.dag_api import DAGApi  # noqa: E501
 
 
