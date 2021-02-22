@@ -81,6 +81,7 @@ class ConnectionCollection(ModelNormal):
         lazy_import()
         return {
             'connections': ([ConnectionCollectionItem],),  # noqa: E501
+            'total_entries': (int,),  # noqa: E501
         }
 
     @cached_property
@@ -90,6 +91,7 @@ class ConnectionCollection(ModelNormal):
 
     attribute_map = {
         'connections': 'connections',  # noqa: E501
+        'total_entries': 'total_entries',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -139,6 +141,7 @@ class ConnectionCollection(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             connections ([ConnectionCollectionItem]): [optional]  # noqa: E501
+            total_entries (int): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
