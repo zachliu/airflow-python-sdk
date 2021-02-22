@@ -9,28 +9,50 @@
 """
 
 
-import sys
-import unittest
+from pprint import pprint
+from test.pretest import API_CLIENT
 
-import airflow_python_sdk
-from airflow_python_sdk.model.update_task_instances_state import UpdateTaskInstancesState
+import pytest
 
+from airflow_python_sdk.api.dag_api import DAGApi  # noqa: E501
+from airflow_python_sdk.model.update_task_instances_state import \
+    UpdateTaskInstancesState
 
-class TestUpdateTaskInstancesState(unittest.TestCase):
-    """UpdateTaskInstancesState unit test stubs"""
+@pytest.fixture
+def dag_api_setup():
+    """Instantiate api"""
+    return DAGApi(API_CLIENT)  # noqa: E501
 
-    def setUp(self):
-        pass
+@pytest.mark.parametrize(
+    "test_input, expected",
+    [
+        ([False, False, False, True], None),
+        ([True, False, False, True], None),
+        ([True, True, False, True], None),
+        ([True, True, True, True], None),
+        ([True, False, True, True], None),
+    ],
+)
+def test_set_task_instances_state(dag_api_setup, test_input, expected):
+    """Test post_set_task_instances_state
+    """
+    dag_id = "test_glue_partitions_sensor"
+    execution_date = "2020-03-25T00:00:00+00:00"
+    include_downstream, include_future, include_past, include_upstream = \
+        test_input
+    update_task_instances_state = UpdateTaskInstancesState(
+        dry_run=True,
+        execution_date=execution_date,
+        include_downstream=include_downstream,
+        include_future=include_future,
+        include_past=include_past,
+        include_upstream=include_upstream,
+        new_state="success",
+        task_id="task1",
+    )  # UpdateTaskInstancesState | Parameters of action
 
-    def tearDown(self):
-        pass
-
-    def testUpdateTaskInstancesState(self):
-        """Test UpdateTaskInstancesState"""
-        # FIXME: construct object with mandatory attributes with example values
-        # model = UpdateTaskInstancesState()  # noqa: E501
-        pass
-
-
-if __name__ == '__main__':
-    unittest.main()
+    # Set a state of task instances
+    api_response = dag_api_setup.post_set_task_instances_state(
+        dag_id, update_task_instances_state
+    )
+    pprint(api_response)
