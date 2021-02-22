@@ -10,18 +10,11 @@
 
 
 from pprint import pprint
-from test.pretest import API_CLIENT
 
 import pytest
 
-from airflow_python_sdk.api.dag_api import DAGApi  # noqa: E501
 from airflow_python_sdk.model.update_task_instances_state import \
     UpdateTaskInstancesState
-
-@pytest.fixture
-def dag_api_setup():
-    """Instantiate api"""
-    return DAGApi(API_CLIENT)  # noqa: E501
 
 @pytest.mark.parametrize(
     "test_input, expected",
