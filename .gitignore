@@ -71,3 +71,4 @@ target/
 .travis*
 git_push.sh
 my_tests.py
+run_tests.sh
