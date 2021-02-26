@@ -52,6 +52,7 @@ class TaskState(ModelSimple):
 
     allowed_values = {
         ('value',): {
+            'None': None,
             'SUCCESS': "success",
             'RUNNING': "running",
             'FAILED': "failed",
@@ -70,7 +71,7 @@ class TaskState(ModelSimple):
 
     additional_properties_type = None
 
-    _nullable = False
+    _nullable = True
 
     @cached_property
     def openapi_types():

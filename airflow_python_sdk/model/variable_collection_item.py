@@ -76,6 +76,7 @@ class VariableCollectionItem(ModelNormal):
         """
         return {
             'key': (str,),  # noqa: E501
+            'value': (str,),  # noqa: E501
         }
 
     @cached_property
@@ -85,6 +86,7 @@ class VariableCollectionItem(ModelNormal):
 
     attribute_map = {
         'key': 'key',  # noqa: E501
+        'value': 'value',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -134,6 +136,7 @@ class VariableCollectionItem(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             key (str): [optional]  # noqa: E501
+            value (str): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

@@ -284,6 +284,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
         used_slots=1,
         queued_slots=1,
         open_slots=1,
+        running_slots=1,
     ) # Pool | 
     update_mask = [
         "update_mask_example",
@@ -383,6 +384,7 @@ with airflow_python_sdk.ApiClient(configuration) as api_client:
         used_slots=1,
         queued_slots=1,
         open_slots=1,
+        running_slots=1,
     ) # Pool | 
 
     # example passing only required values which don't have defaults set

@@ -81,6 +81,7 @@ class Pool(ModelNormal):
             'used_slots': (int,),  # noqa: E501
             'queued_slots': (int,),  # noqa: E501
             'open_slots': (int,),  # noqa: E501
+            'running_slots': (int,),  # noqa: E501
         }
 
     @cached_property
@@ -95,6 +96,7 @@ class Pool(ModelNormal):
         'used_slots': 'used_slots',  # noqa: E501
         'queued_slots': 'queued_slots',  # noqa: E501
         'open_slots': 'open_slots',  # noqa: E501
+        'running_slots': 'running_slots',  # noqa: E501
     }
 
     _composed_schemas = {}
@@ -149,6 +151,7 @@ class Pool(ModelNormal):
             used_slots (int): The number of slots used by running tasks at the moment.. [optional]  # noqa: E501
             queued_slots (int): The number of slots used by queued tasks at the moment.. [optional]  # noqa: E501
             open_slots (int): The number of free slots at the moment.. [optional]  # noqa: E501
+            running_slots (int): The number of running slots at the moment.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
