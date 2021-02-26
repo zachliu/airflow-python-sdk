@@ -28,7 +28,7 @@ from airflow_python_sdk.model.time_delta import TimeDelta
         (["test_glue_partitions_sensor"], None),
     ],
 )
-def test_get_dag(dag_api_setup, test_input, expected):
+def test_get_dag_details(dag_api_setup, test_input, expected):
     """Test the /dags/{dag_id} API EP"""
     dag_id, = test_input
     api_response = dag_api_setup.get_dag_details(
