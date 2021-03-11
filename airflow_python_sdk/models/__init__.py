@@ -57,6 +57,7 @@ from airflow_python_sdk.model.scheduler_status import SchedulerStatus
 from airflow_python_sdk.model.tag import Tag
 from airflow_python_sdk.model.task import Task
 from airflow_python_sdk.model.task_collection import TaskCollection
+from airflow_python_sdk.model.task_collection_all_of import TaskCollectionAllOf
 from airflow_python_sdk.model.task_extra_links import TaskExtraLinks
 from airflow_python_sdk.model.task_instance import TaskInstance
 from airflow_python_sdk.model.task_instance_collection import TaskInstanceCollection

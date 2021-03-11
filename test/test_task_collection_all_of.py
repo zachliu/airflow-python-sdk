@@ -9,39 +9,30 @@
 """
 
 
-from setuptools import setup, find_packages  # noqa: H301
+import sys
+import unittest
 
-NAME = "airflow-python-sdk"
-VERSION = "0.18.13"
-# To install the library, run the following
-#
-# python setup.py install
-#
-# prerequisite: setuptools
-# http://pypi.python.org/pypi/setuptools
+import airflow_python_sdk
+from airflow_python_sdk.model.task import Task
+globals()['Task'] = Task
+from airflow_python_sdk.model.task_collection_all_of import TaskCollectionAllOf
 
-REQUIRES = [
-  "urllib3 >= 1.25.3",
-  "python-dateutil",
-  "nulltype",
-]
 
-setup(
-    name=NAME,
-    version=VERSION,
-    description="Airflow API (Stable)",
-    author="Zach Liu",
-    author_email="zach.z.liu@gmail.com",
-    project_urls={
-        "Bug Tracker": "https://github.com/zachliu/airflow-python-sdk/issues",
-        "Source Code": "https://github.com/zachliu/airflow-python-sdk",
-        "Download": "https://github.com/zachliu/airflow-python-sdk/releases",
-        "Documentation": "https://github.com/zachliu/airflow-python-sdk/blob/master/README.md",
-    },
-    keywords=["OpenAPI", "OpenAPI-Generator", "Airflow API (Stable)"],
-    python_requires=">=3.6",
-    install_requires=REQUIRES,
-    packages=find_packages(exclude=["test", "tests"]),
-    include_package_data=True,
-    license="MIT",
-)
+class TestTaskCollectionAllOf(unittest.TestCase):
+    """TaskCollectionAllOf unit test stubs"""
+
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def testTaskCollectionAllOf(self):
+        """Test TaskCollectionAllOf"""
+        # FIXME: construct object with mandatory attributes with example values
+        # model = TaskCollectionAllOf()  # noqa: E501
+        pass
+
+
+if __name__ == '__main__':
+    unittest.main()
