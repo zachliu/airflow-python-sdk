@@ -29,7 +29,7 @@ from airflow_python_sdk.model.time_delta import TimeDelta
     ],
 )
 def test_get_dag_details(dag_api_setup, test_input, expected):
-    """Test the /dags/{dag_id} API EP"""
+    """Test the /dags/{dag_id}/details API EP"""
     dag_id, = test_input
     api_response = dag_api_setup.get_dag_details(
         dag_id=dag_id,

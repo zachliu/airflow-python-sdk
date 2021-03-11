@@ -26,7 +26,7 @@ from airflow_python_sdk.exceptions import ApiException
     ],
 )
 def test_post_clear_task_instance(dag_api_setup, test_input, expected):
-    """Test ClearTaskInstance
+    """Test the /dags/{dag_id}/clearTaskInstances API EP
     """
     dag_id = "test_glue_partitions_sensor"
     start_date = "2020-01-01T00:00:00.00Z"

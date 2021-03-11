@@ -27,7 +27,7 @@ from airflow_python_sdk.model.update_task_instances_state import \
     ],
 )
 def test_set_task_instances_state(dag_api_setup, test_input, expected):
-    """Test post_set_task_instances_state
+    """Test the /dags/{dag_id}/updateTaskInstancesState API EP
     """
     dag_id = "test_glue_partitions_sensor"
     execution_date = "2020-03-25T00:00:00+00:00"
