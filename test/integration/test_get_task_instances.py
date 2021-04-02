@@ -19,7 +19,7 @@ from airflow_python_sdk.model.list_task_instance_form import ListTaskInstanceFor
 def test_get_task_instances(task_instance_api_setup):
     """Test the /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances API EP"""
     api_response = task_instance_api_setup.get_task_instances(
-        dag_id="test_glue_partitions_sensor",
+        dag_id="example_bash_operator",
         dag_run_id="scheduled__2020-04-13T00:00:00+00:00",
     )
     logging.getLogger().info("%s", api_response)
@@ -30,7 +30,7 @@ def test_get_task_instances_batch(task_instance_api_setup):
     """Test the /dags/~/dagRuns/~/taskInstances/list API EP"""
     list_task_instance_form = ListTaskInstanceForm(
         dag_ids=[
-            "test_glue_partitions_sensor",
+            "example_bash_operator",
         ],
         # ====================================================
         # Uncomment the following to add to the filter
@@ -56,6 +56,49 @@ def test_get_task_instances_batch(task_instance_api_setup):
     ) # ListTaskInstanceForm |
     api_response = task_instance_api_setup.get_task_instances_batch(
         list_task_instance_form
+    )
+    logging.getLogger().info("%s", api_response)
+    print(f"{BCOLORS.OKGREEN}OK{BCOLORS.ENDC}")
+
+
+def test_get_task_instance(task_instance_api_setup):
+    """
+    Test the /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}
+    API EP
+    """
+    api_response = task_instance_api_setup.get_task_instance(
+        dag_id="example_bash_operator",
+        dag_run_id="scheduled__2021-03-20T00:00:00+00:00",
+        task_id="runme_0",
+    )
+    logging.getLogger().info("%s", api_response)
+    print(f"{BCOLORS.OKGREEN}OK{BCOLORS.ENDC}")
+
+def test_get_extra_links(task_instance_api_setup):
+    """
+    Test the /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/links
+    API EP
+    """
+    api_response = task_instance_api_setup.get_extra_links(
+        dag_id="example_bash_operator",
+        dag_run_id="scheduled__2021-03-20T00:00:00+00:00",
+        task_id="runme_0",
+    )
+    logging.getLogger().info("%s", api_response)
+    print(f"{BCOLORS.OKGREEN}OK{BCOLORS.ENDC}")
+
+def test_get_logs(task_instance_api_setup):
+    """
+    Test the
+    /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/logs/
+    {task_try_number}
+    API EP
+    """
+    api_response = task_instance_api_setup.get_log(
+        dag_id="example_bash_operator",
+        dag_run_id="scheduled__2021-03-20T00:00:00+00:00",
+        task_id="runme_0",
+        task_try_number=1,
     )
     logging.getLogger().info("%s", api_response)
     print(f"{BCOLORS.OKGREEN}OK{BCOLORS.ENDC}")

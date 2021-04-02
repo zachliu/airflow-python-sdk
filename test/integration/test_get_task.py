@@ -13,8 +13,11 @@ import logging
 from test.integration.conftest import BCOLORS
 
 
-def test_get_dag(dag_api_setup):
-    """Test the /dags/{dag_id} API EP"""
-    api_response = dag_api_setup.get_dag(dag_id="test_glue_partitions_sensor")
+def test_get_task(dag_api_setup):
+    """Test the /dags/{dag_id}/tasks/{task_id} API EP"""
+    api_response = dag_api_setup.get_task(
+        dag_id="example_bash_operator",
+        task_id="run_after_loop",
+    )
     logging.getLogger().info("%s", api_response)
     print(f"{BCOLORS.OKGREEN}OK{BCOLORS.ENDC}")

@@ -9,14 +9,40 @@
 """
 
 import logging
+from dateutil.parser import parse
 
 from test.integration.conftest import BCOLORS
 
+from airflow_python_sdk.model.list_dag_runs_form import ListDagRunsForm
 
 def test_get_dag_runs(dag_run_api_setup):
     """Test the /dags/{dag_id}/dagRuns API EP"""
     api_response = dag_run_api_setup.get_dag_runs(
-        dag_id="test_glue_partitions_sensor",
+        dag_id="example_bash_operator",
+    )
+    logging.getLogger().info("%s", api_response)
+    print(f"{BCOLORS.OKGREEN}OK{BCOLORS.ENDC}")
+
+
+def test_get_dag_runs_batch(dag_run_api_setup):
+    """Test the /dags/~/dagRuns/list API EP"""
+    list_dag_run_form = ListDagRunsForm(
+        dag_ids=[
+            "example_bash_operator",
+        ],
+        # ====================================================
+        # Uncomment the following to add to the filter
+        # ====================================================
+        execution_date_gte=parse('2021-03-29T00:00:00.00Z'),
+        execution_date_lte=parse('2021-03-30T00:00:00.00Z'),
+        # start_date_gte=parse('1970-01-01T00:00:00.00Z'),
+        # start_date_lte=parse('1970-01-01T00:00:00.00Z'),
+        # end_date_gte=parse('1970-01-01T00:00:00.00Z'),
+        # end_date_lte=parse('1970-01-01T00:00:00.00Z'),
+        # ====================================================
+    )
+    api_response = dag_run_api_setup.get_dag_runs_batch(
+        list_dag_run_form
     )
     logging.getLogger().info("%s", api_response)
     print(f"{BCOLORS.OKGREEN}OK{BCOLORS.ENDC}")

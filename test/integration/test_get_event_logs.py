@@ -18,3 +18,11 @@ def test_get_event_logs(event_log_api_setup):
     api_response = event_log_api_setup.get_event_logs(limit=100, offset=0)
     logging.getLogger().info("%s", api_response)
     print(f"{BCOLORS.OKGREEN}OK{BCOLORS.ENDC}")
+
+def test_get_event_log(event_log_api_setup):
+    """Test the /eventLogs/{event_log_id} API EP"""
+    api_response = event_log_api_setup.get_event_log(
+        event_log_id=1,
+    )
+    logging.getLogger().info("%s", api_response)
+    print(f"{BCOLORS.OKGREEN}OK{BCOLORS.ENDC}")

@@ -37,12 +37,44 @@ import pytest
     ],
 )
 def test_get_xcom_entries(xcom_api_setup, test_input, expected):
-    """Test the /variables API EP"""
+    """Test the
+    /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/xcomEntries
+    API EP
+    """
     dag_id, dag_run_id, task_id = test_input
     api_response = xcom_api_setup.get_xcom_entries(
         dag_id=dag_id,
         dag_run_id=dag_run_id,
         task_id=task_id,
+    )
+    logging.getLogger().info("%s", api_response)
+    print(f"{BCOLORS.OKGREEN}OK{BCOLORS.ENDC}")
+
+@pytest.mark.parametrize(
+    "test_input, expected",
+    [
+        (
+            [
+                "test_glue_python_shell",
+                "scheduled__2020-05-30T00:00:00+00:00",
+                "python_task",
+            ],
+            None
+        ),
+    ],
+)
+def test_get_xcom_entrie(xcom_api_setup, test_input, expected):
+    """Test the
+    /dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances/{task_id}/xcomEntries/
+    {xcom_key}
+    API EP
+    """
+    dag_id, dag_run_id, task_id = test_input
+    api_response = xcom_api_setup.get_xcom_entry(
+        dag_id=dag_id,
+        dag_run_id=dag_run_id,
+        task_id=task_id,
+        xcom_key="return_value",
     )
     logging.getLogger().info("%s", api_response)
     print(f"{BCOLORS.OKGREEN}OK{BCOLORS.ENDC}")

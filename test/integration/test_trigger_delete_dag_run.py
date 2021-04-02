@@ -10,23 +10,35 @@
 
 import logging
 from datetime import datetime
+from time import sleep
 
 from test.integration.conftest import BCOLORS
 
 from airflow_python_sdk.model.dag_run import DAGRun
 from dateutil.parser import parse
 
-def test_trigger_dag_run(dag_run_api_setup):
-    """Test the /dags/{dag_id}/dagRuns API EP (post)"""
+def test_trigger_delete_dag_run(dag_run_api_setup):
+    """Test the /dags/{dag_id}/dagRuns API EP (post) &
+    /dags/{dag_id}/dagRuns/{dag_run_id} API EP (delete)"""
     time_now = datetime.now().strftime("%Y-%m-%dT%H:%M:%S+00:00")
+    dag_run_id = "test2__{}".format(time_now)
     dag_run = DAGRun(
-        dag_run_id=f"test1__{time_now}",
+        dag_run_id=dag_run_id,
         execution_date=parse(time_now),
         conf={},
     )
-    api_response = dag_run_api_setup.post_dag_run(
+    trigger_resp = dag_run_api_setup.post_dag_run(
         dag_id="example_bash_operator",
         dag_run=dag_run,
     )
-    logging.getLogger().info("%s", api_response)
+    logging.getLogger().info("%s", trigger_resp)
+    print(f"{BCOLORS.OKGREEN}OK{BCOLORS.ENDC}")
+
+    sleep(5)
+
+    delete_resp = dag_run_api_setup.delete_dag_run(
+        dag_id="example_bash_operator",
+        dag_run_id=dag_run_id,
+    )
+    logging.getLogger().info("%s", delete_resp)
     print(f"{BCOLORS.OKGREEN}OK{BCOLORS.ENDC}")

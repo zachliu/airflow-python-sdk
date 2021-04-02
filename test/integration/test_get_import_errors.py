@@ -14,10 +14,17 @@ from test.integration.conftest import BCOLORS
 
 
 def test_get_import_errors(import_error_api_setup):
-    """Test the /eventLogs API EP"""
+    """Test the /importErrors and /importErrors/{import_error_id} API EP"""
     api_response = import_error_api_setup.get_import_errors(
         limit=100,
         offset=0,
     )
     logging.getLogger().info("%s", api_response)
     print(f"{BCOLORS.OKGREEN}OK{BCOLORS.ENDC}")
+
+    if api_response.import_errors:
+        api_response = import_error_api_setup.get_import_errors(
+            import_error_id=api_response.import_errors[0].import_error_id,
+        )
+        logging.getLogger().info("%s", api_response)
+        print(f"{BCOLORS.OKGREEN}OK{BCOLORS.ENDC}")
